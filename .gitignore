@@ -37,3 +37,13 @@ Thumbs.db
 
 # local inspiration clones (not part of app source)
 inspirations/
+# local screenshots / scratch captures
+Screenshot*.png
+**/Screenshot*.png
+
+# local secret material
+*.pem
+*.key
+*.p12
+*.pfx
+.envrc
