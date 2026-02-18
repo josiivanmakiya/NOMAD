@@ -1,0 +1,236 @@
+# PERSONAL ESCROW SAVINGS APP — FRONTEND COPY
+# File: frontend/text.tx
+# Purpose: UI copy + labels + microcopy for a personal escrow-based savings layer
+# Tone: Clear, calm, trustworthy, practical
+# Notes: Avoid legal advice. Keep statements plain-language.
+
+[APP_NAME]
+EscrowSave
+
+[TAGLINE]
+Save with guardrails.
+
+[ONE_LINER]
+A personal escrow layer that locks your savings until you choose to release it — on your terms.
+
+[HERO]
+headline=Build savings that actually stay saved
+subheadline=Set goals, lock funds in a personal escrow vault, and release only when you’re ready.
+cta_primary=Start saving
+cta_secondary=See how it works
+trust_hint=Bank-grade security • Transparent fees • Withdraw on your terms
+
+[NAV]
+product=Product
+how_it_works=How it works
+pricing=Pricing
+security=Security
+faq=FAQ
+signin=Sign in
+signup=Create account
+
+[SECTION:PROBLEM]
+headline=Saving is easy. Not touching it is the hard part.
+body=We built a personal escrow layer that adds friction where it matters, without blocking you from emergencies.
+points=Locks savings by default | You decide release rules | Clear, predictable fees
+
+[SECTION:HOW_IT_WORKS]
+headline=How the escrow savings layer works
+step1_title=Create a goal
+step1_body=Name your goal, set a target, and choose how you want releases handled.
+step2_title=Deposit into escrow
+step2_body=Move money into your vault. It’s held and tracked separately from spendable funds.
+step3_title=Release when ready
+step3_body=Unlock on schedule or by request. You stay in control.
+
+[SECTION:FEATURES]
+headline=Designed to keep savings intact
+f1_title=Escrow vault
+f1_body=Funds are held in a dedicated escrow ledger with clear boundaries.
+f2_title=Release rules
+f2_body=Choose timed releases, milestones, or manual approval.
+f3_title=Emergency unlock
+f3_body=Access funds fast in a real emergency, with clear consequences.
+f4_title=Goal tracking
+f4_body=See progress, remaining balance, and projected dates.
+
+[SECTION:SECURITY]
+headline=Security and transparency first
+body=We use encryption, access controls, and audit trails so you can see every movement.
+points=Encryption at rest and in transit | Activity logs | Verified identity controls
+
+[SECTION:PRICING]
+headline=Simple, transparent fees
+body=No surprises. You’ll always see the full cost before you confirm.
+plan_basic=Core escrow vault
+plan_basic_price=Free to open
+plan_basic_detail=Standard deposits + scheduled releases
+plan_plus=Plus controls
+plan_plus_price=$5/month
+plan_plus_detail=Custom release rules + priority support
+
+[SECTION:CTA]
+headline=Start building resilient savings today
+cta_primary=Create your vault
+cta_secondary=Talk to us
+
+[FOOTER]
+copy_right=© 2026 EscrowSave
+links=Privacy | Terms | Contact | Status
+
+[AUTH]
+login_title=Welcome back
+login_sub=Sign in to manage your escrow savings
+email_label=Email
+password_label=Password
+forgot=Forgot password?
+login_cta=Sign in
+no_account=Don’t have an account?
+create=Create account
+
+signup_title=Create your escrow vault
+signup_sub=Set up your account in minutes
+fullname_label=Full name
+phone_label=Phone number
+accept_terms=I agree to the Terms and Privacy Policy
+signup_cta=Create account
+have_account=Already have an account?
+
+[ONBOARDING]
+step1_title=Verify your identity
+step1_body=We use quick verification to protect your account and vault.
+step2_title=Connect a funding source
+step2_body=Link a bank account or debit card to deposit into escrow.
+step3_title=Create your first goal
+step3_body=Give your goal a name and set a target amount.
+step4_title=Choose release rules
+step4_body=Select how and when funds can be released.
+
+[DASHBOARD]
+welcome=Welcome back
+total_saved=Total in escrow
+next_release=Next scheduled release
+progress=Goal progress
+add_goal=Add goal
+add_deposit=Add deposit
+request_release=Request release
+view_activity=View activity
+manage_rules=Manage rules
+
+[GOAL_CARD]
+status_locked=Locked
+status_releasing=Releasing
+status_completed=Completed
+status_paused=Paused
+balance=Balance
+target=Target
+remaining=Remaining
+
+[DEPOSIT]
+headline=Add deposit
+amount_label=Amount
+from_label=From
+to_label=To escrow vault
+schedule_label=Schedule
+schedule_once=One-time deposit
+schedule_weekly=Weekly
+schedule_monthly=Monthly
+confirm=Confirm deposit
+review=Review deposit
+
+[RELEASE]
+headline=Request release
+amount_label=Amount to release
+reason_label=Reason (optional)
+method_label=Release method
+method_scheduled=Scheduled release
+method_manual=Manual approval
+method_emergency=Emergency unlock
+confirm=Confirm release
+review=Review release
+
+[EMERGENCY_UNLOCK]
+headline=Emergency unlock
+body=Emergency unlocks let you access funds immediately. A fee may apply.
+fee_label=Emergency fee
+confirm=Unlock now
+cancel=Go back
+
+[SETTINGS]
+headline=Settings
+profile=Profile
+security=Security
+notifications=Notifications
+linked_accounts=Linked accounts
+release_rules=Release rules
+limits=Limits
+
+[SETTINGS_PROFILE]
+full_name=Full name
+email=Email
+phone=Phone
+address=Address
+save=Save changes
+
+[SETTINGS_SECURITY]
+password=Password
+two_factor=Two-factor authentication
+sessions=Active sessions
+log_out_all=Log out of all sessions
+
+[SETTINGS_NOTIFICATIONS]
+email_updates=Email updates
+sms_updates=SMS updates
+release_alerts=Release alerts
+balance_alerts=Low balance alerts
+
+[SETTINGS_RULES]
+headline=Release rules
+rule_type=Rule type
+rule_timed=Timed release
+rule_milestone=Milestone release
+rule_manual=Manual approval
+rule_grace=Grace period
+rule_confirm=Save rule
+
+[FEES]
+headline=Fees and penalties
+body=We only charge for optional features or expedited access.
+items=Plus subscription | Emergency unlock fee | Payment processing fees
+
+[FAQ]
+q1=What is a personal escrow vault?
+a1=It’s a dedicated savings layer that holds your funds until you choose to release them.
+q2=Can I access my money anytime?
+a2=Yes. You can request a standard release or use emergency unlock if needed.
+q3=Is my money insured?
+a3=We partner with regulated financial institutions for custody and protections.
+q4=What if I change my mind?
+a4=You can adjust or pause your release rules at any time.
+
+[LEGAL]
+disclaimer=This product is for savings organization and planning. It does not provide legal, tax, or investment advice.
+privacy_note=Your information is protected and never sold.
+
+[EMPTY_STATES]
+no_goals=No goals yet
+no_goals_body=Create your first goal to start saving with guardrails.
+no_activity=No activity yet
+no_activity_body=Your escrow activity will appear here.
+
+[TOASTS]
+deposit_success=Deposit scheduled
+release_success=Release requested
+profile_saved=Profile updated
+rule_saved=Rule saved
+
+[ERRORS]
+required=This field is required
+invalid_email=Enter a valid email address
+min_amount=Amount must be greater than $0
+insufficient=Insufficient funds in escrow
+
+[PLACEHOLDERS]
+amount_placeholder=$0.00
+search_placeholder=Search
+notes_placeholder=Add a note (optional)

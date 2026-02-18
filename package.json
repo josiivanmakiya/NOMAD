@@ -1,0 +1,12 @@
+{
+  "name": "nomad-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "description": "NOMAD local workspace scripts",
+  "scripts": {
+    "db:check": "npm run db:check --prefix backend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev": "node scripts/dev-local.js"
+  }
+}

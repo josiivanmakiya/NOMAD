@@ -1,0 +1,102 @@
+export const HISTORY_SPEC = {
+  title: "History spec",
+  subtitle: "This is the visual and semantic contract for NOMAD history.",
+  principles: [
+    "History is an immutable financial memory of intent, time, consequence, and outcome.",
+    "Tone is neutral, descriptive, and non-judgmental.",
+    "No celebration, no shame, no persuasion.",
+  ],
+  rowAnatomy: [
+    "Icon",
+    "Title",
+    "Meta line",
+    "Amount (if money moved)",
+    "Timestamp",
+  ],
+  iconMap: [
+    "Deposit in → Arrow down into tray",
+    "Withdrawal out → Arrow up out of tray",
+    "Lock applied → Lock",
+    "Timer extended → Clock with arrow",
+    "Maturity reached → Check / Clock done",
+    "Relock → Refresh",
+    "Early unlock → Unlock",
+    "Emergency unlock → Alert triangle",
+    "Penalty → Minus / Slash",
+    "System → Gear",
+  ],
+  rowTypes: [
+    {
+      title: "Deposit added to escrow",
+      meta: "Locked for 24 hours based on your total balance",
+      amount: "₦4,000",
+    },
+    {
+      title: "Lock applied",
+      meta: "Your total escrow reached ₦10,000. Lock duration updated to 3 days.",
+    },
+    {
+      title: "Funds re-locked",
+      meta: "Relocking increased total escrow. Timer reset to 5 days.",
+    },
+    {
+      title: "Funds matured",
+      meta: "These funds are now eligible for release.",
+    },
+    {
+      title: "Release requested",
+      meta: "Manual release pending confirmation.",
+      amount: "₦8,000",
+    },
+    {
+      title: "Funds released",
+      meta: "Sent to your linked account.",
+      amount: "₦8,000",
+    },
+    {
+      title: "Early unlock used",
+      meta: "Funds released before maturity. Timer reset on remaining balance.",
+      amount: "₦8,000",
+    },
+    {
+      title: "Friction fee applied",
+      meta: "4% fee for early unlock. This helps reinforce commitment.",
+      amount: "₦320",
+    },
+    {
+      title: "Emergency unlock used",
+      meta: "Immediate access granted. Fee applied per emergency rules.",
+      amount: "₦15,000",
+    },
+    {
+      title: "Rules updated",
+      meta: "Lock duration adjusted based on escrow tier.",
+    },
+  ],
+  eventTypes: [
+    "DEPOSIT_CREATED",
+    "DEPOSIT_RELOCKED",
+    "LOCK_APPLIED",
+    "LOCK_EXTENDED",
+    "LOCK_RESET",
+    "LOCK_MATURED",
+    "RELEASE_REQUESTED",
+    "RELEASE_APPROVED",
+    "FUNDS_RELEASED",
+    "EARLY_UNLOCK_USED",
+    "EMERGENCY_UNLOCK_USED",
+    "FRICTION_FEE_APPLIED",
+    "RULES_UPDATED",
+    "SYSTEM_NOTE",
+  ],
+  invariants: [
+    "History is append-only. Nothing is edited or deleted.",
+    "Events define truth for UI, backend, AI, and analytics.",
+    "Amounts are always positive; direction is inferred by icon.",
+  ],
+  aiRules: [
+    "AI reads events and server-prepared summaries only.",
+    "AI is read-only: no money movement, no rule changes.",
+    "AI can explain patterns and simulate what-ifs with stated assumptions.",
+  ],
+};
