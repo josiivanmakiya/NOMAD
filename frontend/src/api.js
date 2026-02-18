@@ -1,7 +1,17 @@
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const normalizeApiBaseUrl = (value) => {
+  if (value === undefined || value === null) return "http://localhost:5000";
+  const trimmed = String(value).trim();
+  if (!trimmed || trimmed === "/") return "";
+  return trimmed.replace(/\/+$/, "");
+};
+
+const apiBaseUrl = normalizeApiBaseUrl(import.meta.env.VITE_API_BASE_URL);
 const founderAdminKey = import.meta.env.VITE_FOUNDER_ADMIN_KEY || "";
 
 const buildApiBaseCandidates = () => {
+  if (apiBaseUrl === "") {
+    return [""];
+  }
   const candidates = [apiBaseUrl, "http://localhost:5000", "http://localhost:5001", "http://localhost:5002"];
   return [...new Set(candidates.filter(Boolean))];
 };

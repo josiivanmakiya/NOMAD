@@ -111,7 +111,7 @@ export default function LandingPage() {
         <div className="landingV2HeaderInner">
           <div className="landingV2Brand">
             <img src="/images/nomad-hero.svg" alt="NOMAD logo" className="landingV2Logo" />
-            <span>NOMAD</span>
+            <span className="landingV2BrandText">NOMAD</span>
           </div>
           <nav className="landingV2Nav desktop-menu">
             <ul className="landingV2NavList">
