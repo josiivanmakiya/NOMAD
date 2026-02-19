@@ -44,6 +44,12 @@ import GenesisPage from "./pages/GenesisPage.jsx";
 import GenesisAdminPage from "./pages/GenesisAdminPage.jsx";
 import RoadmapPage from "./pages/RoadmapPage.jsx";
 import PublicInsightPage from "./pages/PublicInsightPage.jsx";
+import DisciplinePage from "./pages/DisciplinePage.jsx";
+import HowToStopImpulsiveSpendingPage from "./pages/HowToStopImpulsiveSpendingPage.jsx";
+import MoneySavingAppNigeriaPage from "./pages/MoneySavingAppNigeriaPage.jsx";
+import NomadVsKudaPage from "./pages/NomadVsKudaPage.jsx";
+import SecurityPublicPage from "./pages/SecurityPublicPage.jsx";
+import WaitlistPage from "./pages/WaitlistPage.jsx";
 import SecurityPage from "./pages/settings/SecurityPage.jsx";
 import ChangePinPage from "./pages/settings/security/ChangePinPage.jsx";
 import BiometricsPage from "./pages/settings/security/BiometricsPage.jsx";
@@ -80,6 +86,15 @@ export default function App() {
       <Route path="/tax-efficiency" element={<TaxEfficiencyPage />} />
       <Route path="/knowledge" element={<KnowledgePage />} />
       <Route path="/genesis" element={<GenesisPage />} />
+      <Route path="/discipline" element={<DisciplinePage />} />
+      <Route
+        path="/how-to-stop-impulsive-spending-in-nigeria"
+        element={<HowToStopImpulsiveSpendingPage />}
+      />
+      <Route path="/money-saving-app-nigeria" element={<MoneySavingAppNigeriaPage />} />
+      <Route path="/nomad-vs-kuda" element={<NomadVsKudaPage />} />
+      <Route path="/security" element={<SecurityPublicPage />} />
+      <Route path="/waitlist" element={<WaitlistPage />} />
       <Route path="/roadmap" element={<RoadmapPage />} />
       <Route path="/insight" element={<PublicInsightPage />} />
       <Route path="/rules" element={<RulesPage />} />

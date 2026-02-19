@@ -3205,6 +3205,39 @@ NOTES:
       justify-content: center;
     }
   }
+
+  .seoPage {
+    min-height: 100vh;
+    padding: clamp(2.5rem, 5vw, 4rem) 1rem;
+  }
+
+  .seoPageInner {
+    width: min(100%, 860px);
+    margin: 0 auto;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .seoEyebrow {
+    text-transform: lowercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: #1f7a3f;
+  }
+
+  .seoList {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .seoActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.85rem;
+  }
 }
 
 

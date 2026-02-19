@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import VatWhtCalculatorCard from "../components/VatWhtCalculatorCard.jsx";
+import Seo from "../components/Seo.jsx";
 import { joinGenesisWaitlist } from "../api.js";
 import { GENESIS_TEXT } from "../content/genesisText.js";
 import { ENABLE_PUBLIC_AUTH_ROUTES } from "../config/featureFlags.js";
@@ -107,6 +108,22 @@ export default function LandingPage() {
 
   return (
     <div className="landingV2">
+      <Seo
+        title="Nomad - Financial Discipline App in Nigeria | Control Spending & Lock Savings"
+        description="Nomad helps you control impulsive spending with time-locked savings and behavioral friction. Build real financial discipline in Nigeria."
+        canonical="https://nomadapp.co/"
+        ogTitle="Nomad - The Financial Discipline App"
+        ogDescription="Control spending. Lock savings. Build real discipline."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FinancialService",
+          name: "Nomad",
+          url: "https://nomadapp.co",
+          description:
+            "A financial discipline app that helps users control spending using time-locked deposits.",
+          areaServed: "NG",
+        }}
+      />
       <header className="landingV2Header">
         <div className="landingV2HeaderInner">
           <div className="landingV2Brand">
