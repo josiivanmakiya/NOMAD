@@ -1,71 +1,6 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
-import WhyNomadPage from "./pages/WhyNomadPage.jsx";
-import RulesPage from "./pages/RulesPage.jsx";
-import TimeLawsPage from "./pages/TimeLawsPage.jsx";
-import AiPermissionsPage from "./pages/AiPermissionsPage.jsx";
-import HistorySpecPage from "./pages/HistorySpecPage.jsx";
-import OnboardingPage from "./pages/OnboardingPage.jsx";
-import FastEntryPage from "./pages/FastEntryPage.jsx";
-import SignupPage from "./pages/SignupPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import PinCreatePage from "./pages/PinCreatePage.jsx";
-import PinConfirmPage from "./pages/PinConfirmPage.jsx";
-import VerifyIdentityPage from "./pages/VerifyIdentityPage.jsx";
-import ConnectBankPage from "./pages/ConnectBankPage.jsx";
-import AppLayout from "./components/AppLayout.jsx";
-import DashboardPage from "./pages/DashboardPage.jsx";
-import SafeHomePage from "./pages/SafeHomePage.jsx";
-import DepositPage from "./pages/DepositPage.jsx";
-import DepositsListPage from "./pages/DepositsListPage.jsx";
-import DepositDetailPage from "./pages/DepositDetailPage.jsx";
-import ReleaseDecisionPage from "./pages/ReleaseDecisionPage.jsx";
-import RelockConfirmPage from "./pages/RelockConfirmPage.jsx";
-import ProfilePage from "./pages/ProfilePage.jsx";
-import AccountsPage from "./pages/AccountsPage.jsx";
-import SettingsPage from "./pages/SettingsPage.jsx";
-import LocksListPage from "./pages/LocksListPage.jsx";
-import LockDetailPage from "./pages/LockDetailPage.jsx";
-import LockBreachPage from "./pages/LockBreachPage.jsx";
-import LockRelockPage from "./pages/LockRelockPage.jsx";
-import BalancesPage from "./pages/BalancesPage.jsx";
-import HistoryPage from "./pages/HistoryPage.jsx";
-import AuditPage from "./pages/AuditPage.jsx";
-import VaultPage from "./pages/VaultPage.jsx";
-import GuidePage from "./pages/GuidePage.jsx";
-import ValuesPage from "./pages/ValuesPage.jsx";
-import RecurringProtocolsPage from "./pages/RecurringProtocolsPage.jsx";
-import ProtocolPage from "./pages/ProtocolPage.jsx";
-import NomadCardPage from "./pages/NomadCardPage.jsx";
-import DynastyPage from "./pages/DynastyPage.jsx";
-import TaxEfficiencyPage from "./pages/TaxEfficiencyPage.jsx";
-import KnowledgePage from "./pages/KnowledgePage.jsx";
-import GenesisPage from "./pages/GenesisPage.jsx";
-import GenesisAdminPage from "./pages/GenesisAdminPage.jsx";
-import RoadmapPage from "./pages/RoadmapPage.jsx";
-import PublicInsightPage from "./pages/PublicInsightPage.jsx";
-import DisciplinePage from "./pages/DisciplinePage.jsx";
-import HowToStopImpulsiveSpendingPage from "./pages/HowToStopImpulsiveSpendingPage.jsx";
-import MoneySavingAppNigeriaPage from "./pages/MoneySavingAppNigeriaPage.jsx";
-import NomadVsKudaPage from "./pages/NomadVsKudaPage.jsx";
-import SecurityPublicPage from "./pages/SecurityPublicPage.jsx";
-import WaitlistPage from "./pages/WaitlistPage.jsx";
-import SecurityPage from "./pages/settings/SecurityPage.jsx";
-import ChangePinPage from "./pages/settings/security/ChangePinPage.jsx";
-import BiometricsPage from "./pages/settings/security/BiometricsPage.jsx";
-import IdentityPage from "./pages/settings/IdentityPage.jsx";
-import VerifyBvnPage from "./pages/settings/identity/VerifyBvnPage.jsx";
-import VerifyNinPage from "./pages/settings/identity/VerifyNinPage.jsx";
-import PersonalInfoPage from "./pages/settings/identity/PersonalInfoPage.jsx";
-import BankingPage from "./pages/settings/BankingPage.jsx";
-import FundingAccountsPage from "./pages/settings/banking/FundingAccountsPage.jsx";
-import WithdrawalAccountsPage from "./pages/settings/banking/WithdrawalAccountsPage.jsx";
-import DocumentsPage from "./pages/settings/DocumentsPage.jsx";
-import StatementPage from "./pages/settings/documents/StatementPage.jsx";
-import DarkModePage from "./pages/settings/app/DarkModePage.jsx";
-import SupportPage from "./pages/settings/SupportPage.jsx";
-import ContactPage from "./pages/settings/ContactPage.jsx";
-import LockRulesPage from "./pages/settings/LockRulesPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import {
   ENABLE_FOUNDER_DASHBOARD,
@@ -74,9 +9,83 @@ import {
   ENABLE_APP_ROUTES,
 } from "./config/featureFlags.js";
 
+const WhyNomadPage = lazy(() => import("./pages/WhyNomadPage.jsx"));
+const RulesPage = lazy(() => import("./pages/RulesPage.jsx"));
+const TimeLawsPage = lazy(() => import("./pages/TimeLawsPage.jsx"));
+const AiPermissionsPage = lazy(() => import("./pages/AiPermissionsPage.jsx"));
+const HistorySpecPage = lazy(() => import("./pages/HistorySpecPage.jsx"));
+const OnboardingPage = lazy(() => import("./pages/OnboardingPage.jsx"));
+const FastEntryPage = lazy(() => import("./pages/FastEntryPage.jsx"));
+const SignupPage = lazy(() => import("./pages/SignupPage.jsx"));
+const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
+const PinCreatePage = lazy(() => import("./pages/PinCreatePage.jsx"));
+const PinConfirmPage = lazy(() => import("./pages/PinConfirmPage.jsx"));
+const VerifyIdentityPage = lazy(() => import("./pages/VerifyIdentityPage.jsx"));
+const ConnectBankPage = lazy(() => import("./pages/ConnectBankPage.jsx"));
+const AppLayout = lazy(() => import("./components/AppLayout.jsx"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
+const SafeHomePage = lazy(() => import("./pages/SafeHomePage.jsx"));
+const DepositPage = lazy(() => import("./pages/DepositPage.jsx"));
+const DepositsListPage = lazy(() => import("./pages/DepositsListPage.jsx"));
+const DepositDetailPage = lazy(() => import("./pages/DepositDetailPage.jsx"));
+const ReleaseDecisionPage = lazy(() => import("./pages/ReleaseDecisionPage.jsx"));
+const RelockConfirmPage = lazy(() => import("./pages/RelockConfirmPage.jsx"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage.jsx"));
+const AccountsPage = lazy(() => import("./pages/AccountsPage.jsx"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage.jsx"));
+const LocksListPage = lazy(() => import("./pages/LocksListPage.jsx"));
+const LockDetailPage = lazy(() => import("./pages/LockDetailPage.jsx"));
+const LockBreachPage = lazy(() => import("./pages/LockBreachPage.jsx"));
+const LockRelockPage = lazy(() => import("./pages/LockRelockPage.jsx"));
+const BalancesPage = lazy(() => import("./pages/BalancesPage.jsx"));
+const HistoryPage = lazy(() => import("./pages/HistoryPage.jsx"));
+const AuditPage = lazy(() => import("./pages/AuditPage.jsx"));
+const VaultPage = lazy(() => import("./pages/VaultPage.jsx"));
+const GuidePage = lazy(() => import("./pages/GuidePage.jsx"));
+const ValuesPage = lazy(() => import("./pages/ValuesPage.jsx"));
+const RecurringProtocolsPage = lazy(() => import("./pages/RecurringProtocolsPage.jsx"));
+const ProtocolPage = lazy(() => import("./pages/ProtocolPage.jsx"));
+const NomadCardPage = lazy(() => import("./pages/NomadCardPage.jsx"));
+const DynastyPage = lazy(() => import("./pages/DynastyPage.jsx"));
+const TaxEfficiencyPage = lazy(() => import("./pages/TaxEfficiencyPage.jsx"));
+const KnowledgePage = lazy(() => import("./pages/KnowledgePage.jsx"));
+const GenesisPage = lazy(() => import("./pages/GenesisPage.jsx"));
+const GenesisAdminPage = lazy(() => import("./pages/GenesisAdminPage.jsx"));
+const RoadmapPage = lazy(() => import("./pages/RoadmapPage.jsx"));
+const PublicInsightPage = lazy(() => import("./pages/PublicInsightPage.jsx"));
+const DisciplinePage = lazy(() => import("./pages/DisciplinePage.jsx"));
+const HowToStopImpulsiveSpendingPage = lazy(() =>
+  import("./pages/HowToStopImpulsiveSpendingPage.jsx")
+);
+const MoneySavingAppNigeriaPage = lazy(() => import("./pages/MoneySavingAppNigeriaPage.jsx"));
+const NomadVsKudaPage = lazy(() => import("./pages/NomadVsKudaPage.jsx"));
+const SecurityPublicPage = lazy(() => import("./pages/SecurityPublicPage.jsx"));
+const WaitlistPage = lazy(() => import("./pages/WaitlistPage.jsx"));
+const SecurityPage = lazy(() => import("./pages/settings/SecurityPage.jsx"));
+const ChangePinPage = lazy(() => import("./pages/settings/security/ChangePinPage.jsx"));
+const BiometricsPage = lazy(() => import("./pages/settings/security/BiometricsPage.jsx"));
+const IdentityPage = lazy(() => import("./pages/settings/IdentityPage.jsx"));
+const VerifyBvnPage = lazy(() => import("./pages/settings/identity/VerifyBvnPage.jsx"));
+const VerifyNinPage = lazy(() => import("./pages/settings/identity/VerifyNinPage.jsx"));
+const PersonalInfoPage = lazy(() => import("./pages/settings/identity/PersonalInfoPage.jsx"));
+const BankingPage = lazy(() => import("./pages/settings/BankingPage.jsx"));
+const FundingAccountsPage = lazy(() =>
+  import("./pages/settings/banking/FundingAccountsPage.jsx")
+);
+const WithdrawalAccountsPage = lazy(() =>
+  import("./pages/settings/banking/WithdrawalAccountsPage.jsx")
+);
+const DocumentsPage = lazy(() => import("./pages/settings/DocumentsPage.jsx"));
+const StatementPage = lazy(() => import("./pages/settings/documents/StatementPage.jsx"));
+const DarkModePage = lazy(() => import("./pages/settings/app/DarkModePage.jsx"));
+const SupportPage = lazy(() => import("./pages/settings/SupportPage.jsx"));
+const ContactPage = lazy(() => import("./pages/settings/ContactPage.jsx"));
+const LockRulesPage = lazy(() => import("./pages/settings/LockRulesPage.jsx"));
+
 export default function App() {
   return (
-    <Routes>
+    <Suspense fallback={<div className="page"><p className="hint">Loading...</p></div>}>
+      <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/why-nomad" element={<WhyNomadPage />} />
       <Route path="/values" element={<ValuesPage />} />
@@ -194,8 +203,9 @@ export default function App() {
         </>
       )}
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 }
 

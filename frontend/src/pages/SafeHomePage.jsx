@@ -25,15 +25,35 @@ export default function SafeHomePage() {
   }, [refresh]);
 
   useEffect(() => {
+    let active = true;
     getDeposits()
-      .then((data) => setDepositCount((data.deposits || []).length))
-      .catch(() => setDepositCount(0));
+      .then((data) => {
+        if (!active) return;
+        setDepositCount((data.deposits || []).length);
+      })
+      .catch(() => {
+        if (!active) return;
+        setDepositCount(0);
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
+    let active = true;
     getDisciplineProfile()
-      .then((data) => setDiscipline(data.profile || null))
-      .catch(() => setDiscipline(null));
+      .then((data) => {
+        if (!active) return;
+        setDiscipline(data.profile || null);
+      })
+      .catch(() => {
+        if (!active) return;
+        setDiscipline(null);
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const potential =

@@ -127,7 +127,13 @@ export default function LandingPage() {
       <header className="landingV2Header">
         <div className="landingV2HeaderInner">
           <div className="landingV2Brand">
-            <img src="/images/nomad-hero.svg" alt="NOMAD logo" className="landingV2Logo" />
+            <img
+              src="/images/nomad-hero.svg"
+              alt="NOMAD logo"
+              className="landingV2Logo"
+              width="48"
+              height="48"
+            />
             <span className="landingV2BrandText">NOMAD</span>
           </div>
           <nav className="landingV2Nav desktop-menu">
@@ -143,7 +149,14 @@ export default function LandingPage() {
                     <p className="landingV2SubText">You do not have a spending problem. You have an access problem.</p>
                     <a className="landingV2Continue" href="#problem">Continue reading</a>
                     <div className="landingV2SubMedia">
-                      <img src={whyNavImage1} alt="Why Nomad problem visual" />
+                      <img
+                        src={whyNavImage1}
+                        alt="Why Nomad problem visual"
+                        loading="lazy"
+                        decoding="async"
+                        width="480"
+                        height="320"
+                      />
                     </div>
                   </li>
                   <li>
@@ -151,7 +164,14 @@ export default function LandingPage() {
                     <p className="landingV2SubText">Friction is the space between impulse and regret.</p>
                     <a className="landingV2Continue" href="#mechanism">Continue reading</a>
                     <div className="landingV2SubMedia">
-                      <img src={whyNavImage2} alt="Why Nomad mechanism visual" />
+                      <img
+                        src={whyNavImage2}
+                        alt="Why Nomad mechanism visual"
+                        loading="lazy"
+                        decoding="async"
+                        width="480"
+                        height="320"
+                      />
                     </div>
                   </li>
                 </ul>
@@ -170,7 +190,14 @@ export default function LandingPage() {
                     <p className="landingV2SubText">Full architecture and operating logic.</p>
                     <Link className="landingV2Continue" to="/protocol">Continue reading</Link>
                     <div className="landingV2SubMedia">
-                      <img src={solutionsNavImage1} alt="Protocol visual" />
+                      <img
+                        src={solutionsNavImage1}
+                        alt="Protocol visual"
+                        loading="lazy"
+                        decoding="async"
+                        width="480"
+                        height="320"
+                      />
                     </div>
                   </li>
                   <li>
@@ -183,7 +210,14 @@ export default function LandingPage() {
                     <p className="landingV2SubText">Legacy transfer flow with rule-based release and continuity logic.</p>
                     <Link className="landingV2Continue" to="/dynasty">Continue reading</Link>
                     <div className="landingV2SubMedia">
-                      <img src={solutionsNavImage4} alt="Dynasty visual" />
+                      <img
+                        src={solutionsNavImage4}
+                        alt="Dynasty visual"
+                        loading="lazy"
+                        decoding="async"
+                        width="480"
+                        height="320"
+                      />
                     </div>
                   </li>
                   <li>
@@ -191,7 +225,14 @@ export default function LandingPage() {
                     <p className="landingV2SubText">Phase 1 to Phase 3 trajectory.</p>
                     <Link className="landingV2Continue" to="/roadmap">Continue reading</Link>
                     <div className="landingV2SubMedia">
-                      <img src={solutionsNavImage3} alt="Roadmap visual" />
+                      <img
+                        src={solutionsNavImage3}
+                        alt="Roadmap visual"
+                        loading="lazy"
+                        decoding="async"
+                        width="480"
+                        height="320"
+                      />
                     </div>
                   </li>
                 </ul>
@@ -246,7 +287,15 @@ export default function LandingPage() {
               <h2 className="landingHeroImageHeadline">
                 Take Back Your Wealth With <span className="landingHeroNomadWord">NOMAD</span>
               </h2>
-              <img src={heroImage} alt="Nomad hero visual" className="landingSectionImage" />
+              <img
+                src={heroImage}
+                alt="Nomad hero visual"
+                className="landingSectionImage"
+                width="1280"
+                height="720"
+                fetchPriority="high"
+                decoding="async"
+              />
             </div>
           </div>
         </section>
@@ -298,7 +347,15 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="landingV2SplitImage">
-            <img src={problemImage} alt="Problem section visual" className="landingSectionImage" />
+            <img
+              src={problemImage}
+              alt="Problem section visual"
+              className="landingSectionImage"
+              loading="lazy"
+              decoding="async"
+              width="1280"
+              height="720"
+            />
           </div>
         </section>
 
@@ -341,7 +398,15 @@ export default function LandingPage() {
             <p>Sovereignty: decisions made with time, not pressure.</p>
           </div>
           <div className="landingV2SplitImage">
-            <img src={benefitsImage} alt="Benefits section visual" className="landingSectionImage" />
+            <img
+              src={benefitsImage}
+              alt="Benefits section visual"
+              className="landingSectionImage"
+              loading="lazy"
+              decoding="async"
+              width="1280"
+              height="720"
+            />
           </div>
         </section>
 
