@@ -109,10 +109,10 @@ export default function LandingPage() {
   return (
     <div className="landingV2">
       <Seo
-        title="Nomad - Financial Discipline App in Nigeria | Control Spending & Lock Savings"
+        title="Home | Nomad"
         description="Nomad helps you control impulsive spending with time-locked savings and behavioral friction. Build real financial discipline in Nigeria."
         canonical="https://nomadapp.co/"
-        ogTitle="Nomad - The Financial Discipline App"
+        ogTitle="Home | Nomad"
         ogDescription="Control spending. Lock savings. Build real discipline."
         jsonLd={{
           "@context": "https://schema.org",
@@ -590,3 +590,4 @@ export default function LandingPage() {
     </div>
   );
 }
+

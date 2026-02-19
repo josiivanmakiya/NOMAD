@@ -12,7 +12,7 @@ export const ENABLE_FOUNDER_DASHBOARD = parseBool(
 // Public auth routes can be disabled during waitlist-only launches.
 export const ENABLE_PUBLIC_AUTH_ROUTES = parseBool(
   import.meta.env.VITE_ENABLE_PUBLIC_AUTH_ROUTES,
-  true
+  false
 );
 
 export const FOUNDER_DASHBOARD_PATH =
@@ -27,5 +27,5 @@ export const BYPASS_APP_AUTH_GUARD = parseBool(
 // Waitlist-only launch switch. When false, /app and /home are hidden.
 export const ENABLE_APP_ROUTES = parseBool(
   import.meta.env.VITE_ENABLE_APP_ROUTES,
-  true
+  false
 );
