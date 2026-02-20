@@ -42,6 +42,8 @@ const corsOrigins = String(process.env.CORS_ORIGIN || "http://localhost:5173")
 const isAllowedOrigin = (origin) => {
   if (!origin) return true;
   if (corsOrigins.includes(origin)) return true;
+  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) return true;
+  if (/^https:\/\/(www\.)?nomadapp\.co$/i.test(origin)) return true;
   if (process.env.NODE_ENV !== "production" && /^http:\/\/localhost:\d+$/.test(origin)) {
     return true;
   }
@@ -120,4 +122,5 @@ module.exports = app;
  * - Does not implement business logic itself.
  * - Central place for HTTP surface of the backend.
  */
+
 
