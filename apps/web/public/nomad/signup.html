@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOMAD — Sign Up</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0a0a; color: #f5f2eb; font-family: 'DM Mono', monospace; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.box { width: 100%; max-width: 400px; }
+h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.1em; margin-bottom: 2rem; }
+label { display: block; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 6px; margin-top: 1.25rem; }
+input { width: 100%; background: #1a1a1a; border: 1px solid rgba(245,242,235,0.2); color: #f5f2eb; padding: 12px 16px; font-family: 'DM Mono', monospace; font-size: 14px; outline: none; }
+input:focus { border-color: rgba(245,242,235,0.5); }
+button { width: 100%; margin-top: 1.5rem; background: #f5f2eb; color: #0a0a0a; border: none; padding: 14px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; }
+button:hover { background: #d4d0c8; }
+.err { color: #c0392b; font-size: 12px; margin-top: 1rem; min-height: 18px; }
+.sub { font-size: 12px; color: #888; margin-top: 1.5rem; text-align: center; }
+.sub a { color: #f5f2eb; }
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>NOMAD</h1>
+  <p style="color:#888;font-size:12px;margin-bottom:2rem;">Create your account.</p>
+  <label>Full name</label>
+  <input type="text" id="name" placeholder="Your name" />
+  <label>Email address</label>
+  <input type="email" id="email" placeholder="you@email.com" />
+  <label>Phone number</label>
+  <input type="tel" id="phone" placeholder="+234 000 000 0000" />
+  <label>Create PIN (4–6 digits)</label>
+  <input type="password" id="pin" placeholder="Choose a PIN" maxlength="6" />
+  <button onclick="doSignup()">Create Account</button>
+  <p class="err" id="err"></p>
+  <p class="sub">Already have an account? <a href="/nomad/login.html">Log in</a></p>
+</div>
+<script>
+async function doSignup() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const pin = document.getElementById("pin").value.trim();
+  const errEl = document.getElementById("err");
+  errEl.textContent = "";
+  if (!name || !email || !phone) { errEl.textContent = "All fields required."; return; }
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, phoneNumber: phone, pin, userType: "individual" })
+    });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = data.message || "Signup failed."; return; }
+    const userId = data.user?.id || data.userId || data.user?._id;
+    if (userId) {
+      localStorage.setItem("NOMADUserId", String(userId));
+      localStorage.setItem("delayUser", JSON.stringify(data.user || {}));
+      window.location.href = "/nomad/dashboard.html";
+    } else {
+      errEl.textContent = "Signup failed — no user returned.";
+    }
+  } catch(e) {
+    errEl.textContent = "Cannot reach server.";
+  }
+}
+document.addEventListener("keydown", e => { if (e.key === "Enter") doSignup(); });
+</script>
+</body>
+</html>

@@ -8,17 +8,12 @@ export default defineConfig({
     proxy: {
       "/api": "http://localhost:5000"
     }
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: "./index.html"
+      }
+    }
   }
 });
-
-/**
- * FILE ROLE:
- * Vite configuration for NOMAD frontend tooling.
- *
- * CONNECTS TO:
- * - @vitejs/plugin-react
- *
- * USED BY:
- * - Vite dev server and build scripts
- */
-

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOMAD Insight — Your Financial AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0a0a0a;
+  --white: #f5f2eb;
+  --red: #c0392b;
+  --green-bright: #2ecc71;
+  --amber: #e6a817;
+  --grey: #2a2a2a;
+  --grey-mid: #1a1a1a;
+  --grey-light: #888;
+  --border: rgba(245,242,235,0.10);
+  --border-strong: rgba(245,242,235,0.22);
+}
+
+html, body { height: 100%; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAV */
+nav {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(10,10,10,0.98);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-badge {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  border: 1px solid rgba(46,204,113,0.3);
+  padding: 3px 10px;
+  margin-left: 12px;
+}
+
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+/* APP SHELL */
+.app-shell {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  background: var(--grey-mid);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.profile-section {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin-bottom: 1rem;
+}
+
+.profile-field {
+  margin-bottom: 10px;
+}
+
+.profile-field label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin-bottom: 4px;
+}
+
+.profile-field select,
+.profile-field input {
+  width: 100%;
+  background: var(--black);
+  border: 1px solid var(--border-strong);
+  color: var(--white);
+  padding: 7px 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  outline: none;
+}
+
+.profile-field select option { background: #1a1a1a; }
+
+.score-display {
+  margin-top: 1rem;
+  background: var(--black);
+  border: 1px solid var(--border-strong);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--green-bright);
+}
+
+.score-info { text-align: right; }
+
+.score-level {
+  font-size: 12px;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.score-label {
+  font-size: 10px;
+  color: var(--grey-light);
+  letter-spacing: 0.08em;
+}
+
+/* SUGGESTED QUESTIONS */
+.suggested-section {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.suggested-title {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin-bottom: 0.75rem;
+}
+
+.suggested-q {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--black);
+  border: 1px solid var(--border);
+  color: rgba(245,242,235,0.65);
+  padding: 8px 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  margin-bottom: 6px;
+  line-height: 1.5;
+  transition: all 0.2s;
+}
+
+.suggested-q:hover {
+  border-color: var(--border-strong);
+  color: var(--white);
+  background: var(--grey);
+}
+
+/* MANDATE */
+.mandate-section {
+  padding: 1.25rem 1.5rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+}
+
+.mandate-text {
+  font-size: 10px;
+  color: var(--grey-light);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+.mandate-text strong { color: rgba(245,242,235,0.5); }
+
+/* CHAT AREA */
+.chat-area {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* CHAT HEADER */
+.chat-header {
+  flex-shrink: 0;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,10,10,0.8);
+}
+
+.chat-header-left { display: flex; align-items: center; gap: 12px; }
+
+.insight-avatar {
+  width: 36px;
+  height: 36px;
+  background: var(--grey);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.chat-header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+}
+
+.chat-header-sub {
+  font-size: 10px;
+  color: var(--grey-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green-bright);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--grey-light);
+  padding: 6px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-btn:hover { border-color: var(--border-strong); color: var(--white); }
+
+/* MESSAGES */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  scroll-behavior: smooth;
+}
+
+.messages::-webkit-scrollbar { width: 4px; }
+.messages::-webkit-scrollbar-track { background: transparent; }
+.messages::-webkit-scrollbar-thumb { background: var(--grey); }
+
+/* WELCOME */
+.welcome-block {
+  max-width: 560px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.welcome-icon {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.1em;
+  color: rgba(245,242,235,0.1);
+  margin-bottom: 1rem;
+}
+
+.welcome-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.welcome-sub {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(245,242,235,0.5);
+  line-height: 1.6;
+}
+
+/* MESSAGE BUBBLES */
+.message {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 14px;
+  max-width: 800px;
+  animation: fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user { flex-direction: row-reverse; margin-left: auto; }
+
+.msg-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.msg-avatar.ai {
+  background: var(--grey);
+  border: 1px solid var(--border-strong);
+  color: var(--white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+}
+
+.msg-avatar.user-av {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+}
+
+.msg-body { flex: 1; }
+
+.msg-sender {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey-light);
+  margin-bottom: 6px;
+}
+
+.message.user .msg-sender { text-align: right; }
+
+.msg-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(245,242,235,0.85);
+}
+
+.message.user .msg-text {
+  background: var(--grey);
+  padding: 12px 16px;
+  border-left: 3px solid var(--border-strong);
+  text-align: left;
+}
+
+.msg-text p { margin-bottom: 0.75rem; }
+.msg-text p:last-child { margin-bottom: 0; }
+
+.msg-text strong { color: var(--white); font-weight: 500; }
+
+.msg-text .insight-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--red);
+  display: block;
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.msg-text .insight-num.green { color: var(--green-bright); }
+
+.msg-text ul {
+  list-style: none;
+  margin: 0.75rem 0;
+}
+
+.msg-text ul li {
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+  font-size: 12px;
+  color: rgba(245,242,235,0.7);
+}
+
+.msg-text ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--grey-light);
+}
+
+.msg-text .risk-badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  margin: 2px 4px 2px 0;
+}
+
+.risk-badge.low { background: rgba(46,204,113,0.15); color: var(--green-bright); border: 1px solid rgba(46,204,113,0.3); }
+.risk-badge.med { background: rgba(230,168,23,0.15); color: var(--amber); border: 1px solid rgba(230,168,23,0.3); }
+.risk-badge.high { background: rgba(192,57,43,0.15); color: #e05c4f; border: 1px solid rgba(192,57,43,0.3); }
+
+/* TYPING INDICATOR */
+.typing-indicator {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 5px;
+  padding: 12px 16px;
+  background: var(--grey);
+}
+
+.typing-dots span {
+  width: 5px;
+  height: 5px;
+  background: var(--grey-light);
+  border-radius: 50%;
+  animation: blink 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.3; }
+  40% { opacity: 1; }
+}
+
+/* INPUT AREA */
+.input-area {
+  flex-shrink: 0;
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--border);
+  background: rgba(10,10,10,0.9);
+}
+
+.input-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.chat-input {
+  flex: 1;
+  background: var(--grey);
+  border: 1px solid var(--border-strong);
+  color: var(--white);
+  padding: 12px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  outline: none;
+  resize: none;
+  min-height: 46px;
+  max-height: 120px;
+  transition: border-color 0.2s;
+  line-height: 1.5;
+}
+
+.chat-input:focus { border-color: rgba(245,242,235,0.4); }
+
+.chat-input::placeholder { color: var(--grey-light); }
+
+.send-btn {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  padding: 12px 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.send-btn:hover { background: #d4d0c8; }
+.send-btn:disabled { background: var(--grey); color: var(--grey-light); cursor: not-allowed; }
+
+.input-note {
+  font-size: 10px;
+  color: var(--grey-light);
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .messages { padding: 1.25rem; }
+  .input-area { padding: 1rem 1.25rem; }
+  .chat-header { padding: 1rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div style="display:flex;align-items:center;">
+    <a href="nomad-landing.html" class="nav-logo">NOMAD</a>
+    <span class="nav-badge">Insight AI</span>
+  </div>
+  <div class="nav-links">
+    <a href="nomad-landing.html">Home</a>
+    <a href="nomad-rules.html">Rules</a>
+    <a href="nomad-landing.html#waitlist">Join Waitlist</a>
+  </div>
+</nav>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="profile-section">
+      <p class="profile-label">Your Profile</p>
+      <div class="profile-field">
+        <label>Monthly income</label>
+        <select id="p-income">
+          <option value="below100">Below ₦100,000</option>
+          <option value="100to300" selected>₦100k – ₦300k</option>
+          <option value="300to600">₦300k – ₦600k</option>
+          <option value="600to1500">₦600k – ₦1.5M</option>
+          <option value="above1500">Above ₦1.5M</option>
+        </select>
+      </div>
+      <div class="profile-field">
+        <label>Discipline score</label>
+        <input type="number" id="p-score" value="120" min="0" max="5000" />
+      </div>
+      <div class="profile-field">
+        <label>Biggest daily leak</label>
+        <select id="p-leak">
+          <option value="betting">Betting / gambling</option>
+          <option value="airtime">Airtime / data</option>
+          <option value="food" selected>Impulse food & drinks</option>
+          <option value="transfers">Impulse transfers</option>
+          <option value="shopping">Shopping / lifestyle</option>
+          <option value="unknown">I don't know</option>
+        </select>
+      </div>
+      <div class="score-display">
+        <div class="score-num" id="display-score">120</div>
+        <div class="score-info">
+          <div class="score-level" id="display-level">Trusted</div>
+          <div class="score-label">Conduct Level</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="suggested-section">
+      <p class="suggested-title">Ask Insight</p>
+      <button class="suggested-q" onclick="askQuestion('Where should I invest first at my income level?')">Where should I invest first at my income level?</button>
+      <button class="suggested-q" onclick="askQuestion('How much have I likely leaked in the past 3 years?')">How much have I likely leaked in the past 3 years?</button>
+      <button class="suggested-q" onclick="askQuestion('What is my real risk level for investing right now?')">What is my real risk level for investing right now?</button>
+      <button class="suggested-q" onclick="askQuestion('Should I buy land or invest in the stock market?')">Should I buy land or invest in the stock market?</button>
+      <button class="suggested-q" onclick="askQuestion('What does my conduct level mean for getting a loan?')">What does my conduct level mean for getting a loan?</button>
+      <button class="suggested-q" onclick="askQuestion('Am I ready for Phase 2 asset investing?')">Am I ready for Phase 2 asset investing?</button>
+    </div>
+
+    <div class="mandate-section">
+      <p class="mandate-text"><strong>Mandate:</strong> Read-only discipline engine. Insight observes your record, quantifies your behavioral cost, and returns reality-based guidance. It does not move money. It does not make decisions for you. It tells you the truth.</p>
+    </div>
+  </aside>
+
+  <!-- CHAT -->
+  <div class="chat-area">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="insight-avatar">NI</div>
+        <div>
+          <div class="chat-header-title">Nomad Insight</div>
+          <div class="chat-header-sub"><span class="status-dot"></span>Active — reads your record</div>
+        </div>
+      </div>
+      <button class="clear-btn" onclick="clearChat()">Clear Chat</button>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="welcome-block">
+        <div class="welcome-icon">NI</div>
+        <h2 class="welcome-title">Nomad Insight</h2>
+        <p class="welcome-sub">I know your income level, your conduct score, your leak patterns. Ask me anything about your money — I will give you a straight answer, not a brochure.</p>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea
+          class="chat-input"
+          id="chat-input"
+          placeholder="Ask about investments, risk, your score, your leaks..."
+          rows="1"
+        ></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+      <p class="input-note">Insight gives financial guidance based on your profile. Not financial advice. Always verify before acting.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const LEVELS = [
+  { name: 'Prospect', min: 0 },
+  { name: 'Established', min: 50 },
+  { name: 'Trusted', min: 150 },
+  { name: 'Proven', min: 350 },
+  { name: 'Recognized', min: 700 },
+  { name: 'Distinguished', min: 1200 },
+  { name: 'Sovereign', min: 2000 }
+];
+
+function getLevel(score) {
+  let level = LEVELS[0];
+  for (const l of LEVELS) { if (score >= l.min) level = l; }
+  return level;
+}
+
+function updateScoreDisplay() {
+  const score = parseInt(document.getElementById('p-score').value) || 0;
+  document.getElementById('display-score').textContent = score;
+  document.getElementById('display-level').textContent = getLevel(score).name;
+}
+
+document.getElementById('p-score').addEventListener('input', updateScoreDisplay);
+updateScoreDisplay();
+
+let conversationHistory = [];
+
+function getSystemPrompt() {
+  const incomeMap = {
+    'below100': 'below ₦100,000 per month',
+    '100to300': '₦100,000 to ₦300,000 per month',
+    '300to600': '₦300,000 to ₦600,000 per month',
+    '600to1500': '₦600,000 to ₦1,500,000 per month',
+    'above1500': 'above ₦1,500,000 per month'
+  };
+
+  const leakMap = {
+    'betting': 'sports betting and gambling',
+    'airtime': 'airtime and data',
+    'food': 'impulse food and drinks',
+    'transfers': 'impulse transfers to people',
+    'shopping': 'shopping and lifestyle',
+    'unknown': 'unidentified categories'
+  };
+
+  const income = incomeMap[document.getElementById('p-income').value];
+  const score = document.getElementById('p-score').value;
+  const level = getLevel(parseInt(score)).name;
+  const leak = leakMap[document.getElementById('p-leak').value];
+
+  return `You are Nomad Insight — a brutally honest, sharp, and direct financial AI built into the Nomad app. You are not a generic financial advisor. You know this specific user's context and you speak directly from it.
+
+USER CONTEXT:
+- Monthly income: ${income}
+- Discipline score: ${score} points
+- Conduct level: ${level}
+- Biggest daily leak: ${leak}
+
+YOUR MANDATE:
+- Read-only. You observe and advise. You never say "transfer money" or execute actions.
+- Brutally honest. If someone is not ready for an investment, say so clearly with the reason.
+- Context-specific. Every answer references their income level, score, and leak pattern.
+- Risk-calibrated. Advice changes based on conduct level. A Prospect gets different advice than a Sovereign.
+- Plain language. No jargon. No softness. No brochure language.
+- Nigerian context. Understand Nigeria's financial landscape — NGX, real estate, treasury bills, dollar-denominated savings, crypto, pension, etc.
+
+CONDUCT LEVEL GUIDANCE:
+- Prospect (0-49pts): Too early for any investment beyond building the lock habit. Focus: stop leaks first.
+- Established (50-149pts): Can start looking at T-bills, fixed deposits, and dollar savings. Low risk only.
+- Trusted (150-349pts): Can consider NGX blue chips, real estate savings plans, small mutual funds. Medium-low risk.
+- Proven (350-699pts): Eligible for loan products, diversified portfolio, land banking.
+- Recognized (700-1199pts): Can consider structured products, commodities, fractional real estate.
+- Distinguished (1200-1999pts): Full diversification, peer lending, alternative assets.
+- Sovereign (2000+pts): Full access including RWA, private credit, high-yield structured products.
+
+FORMAT:
+- Keep responses under 280 words unless a deep explanation is genuinely needed.
+- Use plain paragraphs. No markdown headers.
+- When giving numbers, make them specific to their income level.
+- When recommending investments, always state the risk level clearly: LOW RISK, MEDIUM RISK, or HIGH RISK.
+- When someone is not ready for something, say exactly what they need to do first.
+- End responses with one sharp, direct sentence that summarizes the action if any.
+- Do not use emojis.
+- Do not be warm or encouraging in a hollow way. Be useful.`;
+}
+
+function scrollToBottom() {
+  const messages = document.getElementById('messages');
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function addMessage(role, content) {
+  const messages = document.getElementById('messages');
+
+  const div = document.createElement('div');
+  div.className = `message ${role === 'user' ? 'user' : 'ai'}`;
+
+  const avatar = document.createElement('div');
+  avatar.className = `msg-avatar ${role === 'user' ? 'user-av' : 'ai'}`;
+  avatar.textContent = role === 'user' ? 'YOU' : 'NI';
+
+  const body = document.createElement('div');
+  body.className = 'msg-body';
+
+  const sender = document.createElement('div');
+  sender.className = 'msg-sender';
+  sender.textContent = role === 'user' ? 'You' : 'Nomad Insight';
+
+  const text = document.createElement('div');
+  text.className = 'msg-text';
+
+  if (role === 'assistant') {
+    text.innerHTML = formatAIResponse(content);
+  } else {
+    text.textContent = content;
+  }
+
+  body.appendChild(sender);
+  body.appendChild(text);
+  div.appendChild(avatar);
+  div.appendChild(body);
+  messages.appendChild(div);
+  scrollToBottom();
+}
+
+function formatAIResponse(text) {
+  let html = text
+    .split('\n\n')
+    .filter(p => p.trim())
+    .map(p => {
+      p = p.trim();
+      if (p.startsWith('- ') || p.startsWith('• ')) {
+        const items = p.split('\n').map(l => l.replace(/^[-•]\s*/, '').trim()).filter(Boolean);
+        return '<ul>' + items.map(i => `<li>${i}</li>`).join('') + '</ul>';
+      }
+      p = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      p = p.replace(/LOW RISK/g, '<span class="risk-badge low">Low Risk</span>');
+      p = p.replace(/MEDIUM RISK/g, '<span class="risk-badge med">Medium Risk</span>');
+      p = p.replace(/HIGH RISK/g, '<span class="risk-badge high">High Risk</span>');
+      return `<p>${p}</p>`;
+    })
+    .join('');
+  return html;
+}
+
+function showTyping() {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'typing-indicator';
+  div.id = 'typing';
+
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar ai';
+  avatar.textContent = 'NI';
+
+  const dots = document.createElement('div');
+  dots.className = 'typing-dots';
+  dots.innerHTML = '<span></span><span></span><span></span>';
+
+  div.appendChild(avatar);
+  div.appendChild(dots);
+  messages.appendChild(div);
+  scrollToBottom();
+}
+
+function hideTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const btn = document.getElementById('send-btn');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  btn.disabled = true;
+
+  addMessage('user', text);
+  conversationHistory.push({ role: 'user', content: text });
+
+  showTyping();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: getSystemPrompt(),
+        messages: conversationHistory
+      })
+    });
+
+    const data = await response.json();
+    hideTyping();
+
+    if (data.content && data.content[0]) {
+      const reply = data.content[0].text;
+      conversationHistory.push({ role: 'assistant', content: reply });
+      addMessage('assistant', reply);
+    } else {
+      addMessage('assistant', 'Something went wrong reading the response. Try again.');
+    }
+  } catch (err) {
+    hideTyping();
+    addMessage('assistant', 'Connection issue. Check your network and try again.');
+  }
+
+  btn.disabled = false;
+  input.focus();
+}
+
+function askQuestion(q) {
+  document.getElementById('chat-input').value = q;
+  sendMessage();
+}
+
+function clearChat() {
+  conversationHistory = [];
+  const messages = document.getElementById('messages');
+  messages.innerHTML = `
+    <div class="welcome-block">
+      <div class="welcome-icon">NI</div>
+      <h2 class="welcome-title">Nomad Insight</h2>
+      <p class="welcome-sub">I know your income level, your conduct score, your leak patterns. Ask me anything about your money — I will give you a straight answer, not a brochure.</p>
+    </div>`;
+}
+
+const input = document.getElementById('chat-input');
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+input.addEventListener('input', () => {
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+});
+</script>
+</body>
+</html>
