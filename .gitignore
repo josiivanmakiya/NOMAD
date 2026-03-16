@@ -47,3 +47,5 @@ Screenshot*.png
 *.p12
 *.pfx
 .envrc
+apps/web/dist/
+node_modules/

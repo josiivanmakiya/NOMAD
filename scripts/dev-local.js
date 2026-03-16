@@ -8,20 +8,15 @@ const run = (command, args, label, options = {}) =>
       shell: true,
       ...options,
     });
-
     child.stdout.on("data", (chunk) => {
       process.stdout.write(`[${label}] ${chunk}`);
     });
     child.stderr.on("data", (chunk) => {
       process.stderr.write(`[${label}] ${chunk}`);
     });
-
     child.on("error", reject);
     child.on("close", (code) => {
-      if (code === 0) {
-        resolve();
-        return;
-      }
+      if (code === 0) { resolve(); return; }
       reject(new Error(`${label} exited with code ${code}`));
     });
   });
@@ -31,47 +26,39 @@ const spawnLongRunning = (command, args, label) => {
     stdio: ["inherit", "pipe", "pipe"],
     shell: true,
   });
-
   child.stdout.on("data", (chunk) => {
     process.stdout.write(`[${label}] ${chunk}`);
   });
   child.stderr.on("data", (chunk) => {
     process.stderr.write(`[${label}] ${chunk}`);
   });
-
   return child;
 };
 
 const main = async () => {
-  console.log("Checking MongoDB connection first...");
-  await run("npm", ["run", "db:check", "--prefix", "backend"], "db");
-  console.log("DB check passed. Starting backend + frontend...");
+  console.log("Checking MongoDB connection...");
+  await run("npm", ["run", "db:check", "--prefix", "apps/api"], "db");
+  console.log("DB check passed. Starting api + web...");
 
-  const backend = spawnLongRunning("npm", ["run", "dev", "--prefix", "backend"], "backend");
-  const frontend = spawnLongRunning("npm", ["run", "dev", "--prefix", "frontend"], "frontend");
+  const api = spawnLongRunning("npm", ["run", "dev", "--prefix", "apps/api"], "api");
+  const web = spawnLongRunning("npm", ["run", "dev", "--prefix", "apps/web"], "web");
 
   const shutdown = (signal = "SIGTERM") => {
-    if (!backend.killed) backend.kill(signal);
-    if (!frontend.killed) frontend.kill(signal);
+    if (!api.killed) api.kill(signal);
+    if (!web.killed) web.kill(signal);
   };
 
-  process.on("SIGINT", () => {
-    shutdown("SIGINT");
-    process.exit(0);
-  });
-  process.on("SIGTERM", () => {
-    shutdown("SIGTERM");
-    process.exit(0);
-  });
+  process.on("SIGINT", () => { shutdown("SIGINT"); process.exit(0); });
+  process.on("SIGTERM", () => { shutdown("SIGTERM"); process.exit(0); });
 
-  backend.on("close", (code) => {
-    console.error(`backend exited (${code}). Stopping frontend.`);
+  api.on("close", (code) => {
+    console.error(`api exited (${code}). Stopping web.`);
     shutdown();
     process.exit(code || 1);
   });
 
-  frontend.on("close", (code) => {
-    console.error(`frontend exited (${code}). Stopping backend.`);
+  web.on("close", (code) => {
+    console.error(`web exited (${code}). Stopping api.`);
     shutdown();
     process.exit(code || 1);
   });

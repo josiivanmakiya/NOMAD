@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOMAD — Sovereignty Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a; --white: #f5f2eb; --red: #c0392b;
+  --green-bright: #2ecc71; --amber: #e6a817;
+  --grey: #2a2a2a; --grey-mid: #1a1a1a; --grey-light: #888;
+  --border: rgba(245,242,235,0.10); --border-strong: rgba(245,242,235,0.22);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.6; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.15em; color: var(--white); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-light); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-cta { background: var(--white); color: var(--black); border: none; padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: #d4d0c8; }
+section { padding: 7rem 2.5rem; }
+.container { max-width: 960px; margin: 0 auto; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* HERO */
+#hero { min-height: 60vh; display: flex; align-items: center; padding-top: 120px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+#hero::before { content: 'ROAD\AMAP'; white-space: pre; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: clamp(100px, 18vw, 260px); color: rgba(245,242,235,0.025); right: -2%; top: 50%; transform: translateY(-50%); letter-spacing: 0.05em; pointer-events: none; line-height: 0.85; }
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1rem; }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 100px); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 1.5rem; }
+.hero-title span { color: var(--red); }
+.hero-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(16px, 2vw, 22px); color: rgba(245,242,235,0.55); max-width: 520px; line-height: 1.6; }
+
+/* PHASES TIMELINE */
+#phases { background: #0d0d0d; border-bottom: 1px solid var(--border); }
+.timeline { position: relative; padding-left: 3rem; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px; background: var(--border-strong); }
+.phase-block { position: relative; margin-bottom: 5rem; padding-bottom: 0; }
+.phase-block:last-child { margin-bottom: 0; }
+.phase-dot { position: absolute; left: -2.85rem; top: 6px; width: 16px; height: 16px; border: 1px solid var(--border-strong); background: var(--black); display: flex; align-items: center; justify-content: center; }
+.phase-dot.live { background: var(--green-bright); border-color: var(--green-bright); }
+.phase-dot.soon { background: var(--amber); border-color: var(--amber); }
+.phase-dot.future { background: var(--grey); border-color: var(--border-strong); }
+.phase-dot-inner { width: 6px; height: 6px; background: var(--black); }
+.phase-dot.live .phase-dot-inner { background: var(--black); animation: pulsedot 2s infinite; }
+@keyframes pulsedot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.phase-status { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.phase-status.live { color: var(--green-bright); }
+.phase-status.soon { color: var(--amber); }
+.phase-status.future { color: var(--grey-light); }
+.phase-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 60px); letter-spacing: 0.03em; line-height: 1; margin-bottom: 0.5rem; }
+.phase-tagline { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 16px; color: rgba(245,242,235,0.5); margin-bottom: 1.5rem; }
+.phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 1.5rem; }
+.phase-card { background: var(--grey); padding: 1.25rem; }
+.phase-card-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 8px; }
+.phase-card-val { font-size: 13px; color: var(--white); line-height: 1.6; }
+.phase-features { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.phase-feature { background: var(--grey-mid); border: 1px solid var(--border); padding: 10px 14px; font-size: 11px; color: rgba(245,242,235,0.65); line-height: 1.5; display: flex; gap: 8px; align-items: flex-start; }
+.phase-feature-dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.phase-feature-dot.live { background: var(--green-bright); }
+.phase-feature-dot.soon { background: var(--amber); }
+.phase-feature-dot.future { background: var(--grey-light); }
+
+/* BRIDGE */
+#bridge { border-bottom: 1px solid var(--border); }
+.bridge-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin: 3rem 0; }
+.bridge-col { background: var(--grey); padding: 2rem; }
+.bridge-col.highlight { background: #1a1a1a; border: 1px solid var(--border-strong); }
+.bridge-col-head { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.bridge-col.highlight .bridge-col-head { color: var(--amber); border-bottom-color: var(--amber); }
+.bridge-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 11px; }
+.bridge-row:last-child { border-bottom: none; }
+.bridge-row-label { color: var(--grey-light); }
+.bridge-row-val { color: var(--white); text-align: right; max-width: 55%; line-height: 1.4; }
+
+/* GLOBAL */
+#global { background: #0d0d0d; border-bottom: 1px solid var(--border); }
+.global-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 3rem; }
+.global-card { background: var(--grey); padding: 2rem; position: relative; overflow: hidden; }
+.global-card::before { content: attr(data-flag); position: absolute; right: 1rem; top: 1rem; font-size: 28px; opacity: 0.4; }
+.global-card-phase { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+.global-card-phase.live { color: var(--green-bright); }
+.global-card-phase.soon { color: var(--amber); }
+.global-card-phase.future { color: var(--grey-light); }
+.global-card-country { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.04em; margin-bottom: 4px; }
+.global-card-detail { font-size: 11px; color: var(--grey-light); line-height: 1.7; }
+
+/* CTA */
+#roadmap-cta { text-align: center; }
+.cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 64px); letter-spacing: 0.03em; line-height: 1; margin-bottom: 1.5rem; }
+.cta-title span { color: var(--red); }
+.cta-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px; color: rgba(245,242,235,0.55); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.6; }
+.btn-primary { background: var(--white); color: var(--black); border: none; padding: 14px 36px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
+.btn-primary:hover { background: #d4d0c8; transform: translateY(-1px); }
+
+footer { padding: 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.15em; color: var(--white); }
+.footer-copy { font-size: 11px; color: var(--grey-light); }
+
+@media (max-width: 768px) {
+  section { padding: 5rem 1.5rem; }
+  nav { padding: 1rem 1.5rem; }
+  .phase-grid, .bridge-grid, .global-grid { grid-template-columns: 1fr; }
+  .phase-features { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="nomad-landing.html" class="nav-logo">NOMAD</a>
+  <div class="nav-links">
+    <a href="nomad-landing.html">Home</a>
+    <a href="nomad-rules.html">Rules</a>
+    <a href="nomad-insight.html">Insight AI</a>
+    <a href="nomad-landing.html#waitlist" class="nav-cta">Join Waitlist</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <p class="eyebrow reveal">A financial maturity roadmap</p>
+    <h1 class="hero-title reveal">Preservation<br/>first.<br/><span>Sovereignty</span><br/>next.</h1>
+    <p class="hero-sub reveal">Phase 1 is live. Phase 2 is being built. Phase 3 is the destination. This is where it goes and why.</p>
+  </div>
+</section>
+
+<section id="phases">
+  <div class="container">
+    <div class="timeline">
+
+      <div class="phase-block reveal">
+        <div class="phase-dot live"><div class="phase-dot-inner"></div></div>
+        <p class="phase-status live">Phase 1 — Live Now</p>
+        <h2 class="phase-name">The Fortress</h2>
+        <p class="phase-tagline">Stop the leak. Build the record. Prove the discipline.</p>
+        <div class="phase-grid">
+          <div class="phase-card">
+            <p class="phase-card-label">Focus</p>
+            <p class="phase-card-val">Capital Preservation. Stop money leaving without intent.</p>
+          </div>
+          <div class="phase-card">
+            <p class="phase-card-label">Mechanism</p>
+            <p class="phase-card-val">Time-locked escrow. Reset Rule. Behavioral leak audit.</p>
+          </div>
+          <div class="phase-card">
+            <p class="phase-card-label">Outcome</p>
+            <p class="phase-card-val">Discipline score built. Credit record begins. Leak math quantified.</p>
+          </div>
+        </div>
+        <div class="phase-features">
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Income-relative lock tiers</div>
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Discipline score + conduct levels</div>
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Auto-relock on maturity</div>
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Tax vault provisioning</div>
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Nomad Insight AI</div>
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Leak audit dashboard</div>
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Lender score visibility (Established+)</div>
+          <div class="phase-feature"><div class="phase-feature-dot live"></div>Nigerian bank rails — all major banks</div>
+        </div>
+      </div>
+
+      <div class="phase-block reveal">
+        <div class="phase-dot soon"><div class="phase-dot-inner"></div></div>
+        <p class="phase-status soon">Phase 2 — In Development</p>
+        <h2 class="phase-name">The Gateway</h2>
+        <p class="phase-tagline">Preserved capital finds its first yield. Money starts working.</p>
+        <div class="phase-grid">
+          <div class="phase-card">
+            <p class="phase-card-label">Focus</p>
+            <p class="phase-card-val">Real World Assets. Matured capital deployed into yield-bearing structures.</p>
+          </div>
+          <div class="phase-card">
+            <p class="phase-card-label">Mechanism</p>
+            <p class="phase-card-val">Fractional land. Commodity finance. Export bonds. Treasury products.</p>
+          </div>
+          <div class="phase-card">
+            <p class="phase-card-label">Outcome</p>
+            <p class="phase-card-val">Transition from pure preservation to disciplined capital deployment.</p>
+          </div>
+        </div>
+        <div class="phase-features">
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Peer-to-peer loan access (Proven+)</div>
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Fractional real estate entry</div>
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Nigerian treasury bill access</div>
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Commodity-linked structured notes</div>
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Dollar-denominated savings rails</div>
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Lender API — score as credit signal</div>
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Ghana and Kenya expansion</div>
+          <div class="phase-feature"><div class="phase-feature-dot soon"></div>Export bond participation</div>
+        </div>
+      </div>
+
+      <div class="phase-block reveal">
+        <div class="phase-dot future"><div class="phase-dot-inner"></div></div>
+        <p class="phase-status future">Phase 3 — Future Vision</p>
+        <h2 class="phase-name">The Sovereign</h2>
+        <p class="phase-tagline">Institutional infrastructure. Generational capital. Self-sustaining loops.</p>
+        <div class="phase-grid">
+          <div class="phase-card">
+            <p class="phase-card-label">Focus</p>
+            <p class="phase-card-val">Institutional services. Dynasty trusts. Private capital management.</p>
+          </div>
+          <div class="phase-card">
+            <p class="phase-card-label">Mechanism</p>
+            <p class="phase-card-val">Behavioral credit history as institutional trust signal. Global rails.</p>
+          </div>
+          <div class="phase-card">
+            <p class="phase-card-label">Outcome</p>
+            <p class="phase-card-val">Self-sustaining capital loops. Wealth that passes generations.</p>
+          </div>
+        </div>
+        <div class="phase-features">
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Dynasty Lock — generational transfer</div>
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Private client guidance</div>
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Full RWA allocation access</div>
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Nomad Card — discipline firewall</div>
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Pan-African expansion</div>
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Diaspora rails — UK, US, Canada</div>
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Alternative credit tier — global</div>
+          <div class="phase-feature"><div class="phase-feature-dot future"></div>Institutional partner network</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="bridge">
+  <div class="container">
+    <p class="eyebrow reveal">The institutional bridge</p>
+    <h2 class="reveal" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);letter-spacing:0.03em;line-height:1;margin-bottom:1rem;">Nomad does not compete<br/>with banks. It prepares<br/>users for them.</h2>
+    <p class="reveal" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;color:rgba(245,242,235,0.55);max-width:520px;line-height:1.6;">We cultivate their best customers — and eventually become the infrastructure that makes their credit decisions smarter.</p>
+    <div class="bridge-grid reveal">
+      <div class="bridge-col">
+        <p class="bridge-col-head">Traditional Bank</p>
+        <div class="bridge-row"><span class="bridge-row-label">Minimum</span><span class="bridge-row-val">₦0</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Discipline model</span><span class="bridge-row-val">Low friction, high spend velocity</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Credit signal</span><span class="bridge-row-val">Salary domiciliation, BVN history</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Asset access</span><span class="bridge-row-val">Basic savings products</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Legacy</span><span class="bridge-row-val">Probate-heavy</span></div>
+      </div>
+      <div class="bridge-col highlight">
+        <p class="bridge-col-head">Nomad (The Bridge)</p>
+        <div class="bridge-row"><span class="bridge-row-label">Minimum</span><span class="bridge-row-val">₦1,000</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Discipline model</span><span class="bridge-row-val">Reset Rule + behavioral lock</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Credit signal</span><span class="bridge-row-val">Behavioral conduct record</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Asset access</span><span class="bridge-row-val">Phase 2 gateway (roadmap)</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Legacy</span><span class="bridge-row-val">Dynasty protocol path</span></div>
+      </div>
+      <div class="bridge-col">
+        <p class="bridge-col-head">Elite Private Bank</p>
+        <div class="bridge-row"><span class="bridge-row-label">Minimum</span><span class="bridge-row-val">$10,000,000+</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Discipline model</span><span class="bridge-row-val">Institutional controls</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Credit signal</span><span class="bridge-row-val">Relationship history</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Asset access</span><span class="bridge-row-val">Private markets, RWA</span></div>
+        <div class="bridge-row"><span class="bridge-row-label">Legacy</span><span class="bridge-row-val">Structured trusts</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="global">
+  <div class="container">
+    <p class="eyebrow reveal">Africa first. Then the world.</p>
+    <h2 class="reveal" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);letter-spacing:0.03em;line-height:1;margin-bottom:1rem;">The same standard.<br/>Every currency.</h2>
+    <p class="reveal" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;color:rgba(245,242,235,0.55);max-width:520px;line-height:1.6;margin-bottom:0;">Discipline is not cultural. The lock tier system works in naira, cedis, shillings, or pounds. The rules do not change. Only the currency does.</p>
+    <div class="global-grid reveal">
+      <div class="global-card" data-flag="🇳🇬">
+        <p class="global-card-phase live">Phase 1 — Live</p>
+        <p class="global-card-country">Nigeria</p>
+        <p class="global-card-detail">Founding market. NGN rails via Providus Bank. All major banks supported. 40M credit-invisible adults.</p>
+      </div>
+      <div class="global-card" data-flag="🇬🇭">
+        <p class="global-card-phase soon">Phase 2 — Coming</p>
+        <p class="global-card-country">Ghana</p>
+        <p class="global-card-detail">GHS rails. Mobile money integration. Similar behavioral credit gap. Second market target.</p>
+      </div>
+      <div class="global-card" data-flag="🇰🇪">
+        <p class="global-card-phase soon">Phase 2 — Coming</p>
+        <p class="global-card-country">Kenya</p>
+        <p class="global-card-detail">KES and M-Pesa rails. Strong fintech infrastructure. East Africa gateway.</p>
+      </div>
+      <div class="global-card" data-flag="🇬🇧">
+        <p class="global-card-phase future">Phase 3 — Future</p>
+        <p class="global-card-country">UK Diaspora</p>
+        <p class="global-card-detail">GBP rails. Nigerian and African diaspora. Remittance preservation layer.</p>
+      </div>
+      <div class="global-card" data-flag="🇿🇦">
+        <p class="global-card-phase future">Phase 3 — Future</p>
+        <p class="global-card-country">South Africa</p>
+        <p class="global-card-detail">ZAR rails. Large formal market. Behavioral credit layer on existing infrastructure.</p>
+      </div>
+      <div class="global-card" data-flag="🌍">
+        <p class="global-card-phase future">Phase 3 — Future</p>
+        <p class="global-card-country">Pan-Africa</p>
+        <p class="global-card-detail">Universal lock standard. Local currency rails. One conduct record across borders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap-cta">
+  <div class="container">
+    <h2 class="cta-title reveal">You are early.<br/><span>Stay early.</span></h2>
+    <p class="cta-sub reveal">The people who build their record in Phase 1 arrive at Phase 2 with an advantage no late joiner can buy.</p>
+    <a href="nomad-landing.html#waitlist" class="btn-primary reveal">Secure Your Spot</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">NOMAD</span>
+  <span class="footer-copy">© 2025 Nomad — Preservation first. Sovereignty next.</span>
+</footer>
+
+<script>
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.06 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -2,11 +2,18 @@
   "name": "nomad-workspace",
   "private": true,
   "version": "1.0.0",
-  "description": "NOMAD local workspace scripts",
+  "description": "NOMAD monorepo workspace",
+  "workspaces": [
+    "apps/web",
+    "apps/api",
+    "packages/shared"
+  ],
   "scripts": {
-    "db:check": "npm run db:check --prefix backend",
-    "dev:backend": "npm run dev --prefix backend",
-    "dev:frontend": "npm run dev --prefix frontend",
-    "dev": "node scripts/dev-local.js"
+    "dev": "node scripts/dev-local.js",
+    "dev:web": "npm run dev --prefix apps/web",
+    "dev:api": "npm run dev --prefix apps/api",
+    "db:check": "npm run db:check --prefix apps/api",
+    "build:web": "npm run build --prefix apps/web",
+    "build:api": "npm run build --prefix apps/api"
   }
 }
