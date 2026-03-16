@@ -9,7 +9,6 @@ import { DashboardProvider } from "./state/DashboardContext.jsx";
 import { DepositProvider } from "./state/DepositContext.jsx";
 import { UiProvider } from "./state/UiContext.jsx";
 import { CurrencyProvider } from "./state/CurrencyContext.jsx";
-import { LockProvider } from "./state/LockContext.jsx";
 import { HistoryProvider } from "./state/HistoryContext.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -21,11 +20,9 @@ createRoot(document.getElementById("root")).render(
             <AccountProvider>
               <DashboardProvider>
                 <DepositProvider>
-                  <LockProvider>
-                    <HistoryProvider>
-                      <App />
-                    </HistoryProvider>
-                  </LockProvider>
+                  <HistoryProvider>
+                    <App />
+                  </HistoryProvider>
                 </DepositProvider>
               </DashboardProvider>
             </AccountProvider>
@@ -35,16 +32,3 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
-/**
- * FILE ROLE:
- * React entrypoint that mounts providers and routing.
- *
- * CONNECTS TO:
- * - src/App.jsx
- * - state/*Context.jsx providers
- * - styles.css
- *
- * USED BY:
- * - index.html
- */

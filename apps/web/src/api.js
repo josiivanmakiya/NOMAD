@@ -181,15 +181,12 @@ export const cancelRecurringProtocol = (protocolId) =>
 export const getRecurringRecommendation = () =>
   fetchJson("/api/protocols/recommendation/cost");
 
-export const listDynastyLocks = () => fetchJson("/api/dynasty");
 
-export const createDynastyLock = ({
   beneficiaryName,
   beneficiaryDOB,
   targetAge,
   amount,
 }) =>
-  fetchJson("/api/dynasty", {
     method: "POST",
     body: JSON.stringify({
       beneficiaryName,
@@ -199,13 +196,9 @@ export const createDynastyLock = ({
     }),
   });
 
-export const setDynastyIrrevocable = (legacyLockId) =>
-  fetchJson(`/api/dynasty/${legacyLockId}/irrevocable`, {
     method: "POST",
   });
 
-export const getDynastyReadiness = (legacyLockId) =>
-  fetchJson(`/api/dynasty/${legacyLockId}/readiness`);
 
 export const signupUser = ({
   name,
