@@ -568,3 +568,19 @@ if (!userId) {
   loadDashboard();
 }
 </script>
+<script>
+const stored = localStorage.getItem("delayUser");
+if (!stored) {
+  window.location.href = "/nomad/login.html";
+} else {
+  const user = JSON.parse(stored);
+  const name = user.name || "Nomad";
+  const first = name.split(" ")[0];
+  const initials = name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
+  document.querySelectorAll(".sidebar-name").forEach(el => el.textContent = name);
+  document.querySelectorAll(".user-avatar").forEach(el => el.textContent = initials);
+  document.querySelectorAll(".nav-user span").forEach(el => el.textContent = name);
+  const greeting = document.querySelector(".page-header p");
+  if (greeting) greeting.textContent = "Good morning, " + first;
+}
+</script>

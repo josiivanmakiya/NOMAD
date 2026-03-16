@@ -9,61 +9,54 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #0a0a0a; color: #f5f2eb; font-family: 'DM Mono', monospace; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
 .box { width: 100%; max-width: 400px; }
-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.1em; margin-bottom: 2rem; }
+h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.sub-head { color: #888; font-size: 12px; margin-bottom: 2.5rem; }
 label { display: block; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 6px; margin-top: 1.25rem; }
-input { width: 100%; background: #1a1a1a; border: 1px solid rgba(245,242,235,0.2); color: #f5f2eb; padding: 12px 16px; font-family: 'DM Mono', monospace; font-size: 14px; outline: none; }
+input { width: 100%; background: #1a1a1a; border: 1px solid rgba(245,242,235,0.15); color: #f5f2eb; padding: 12px 16px; font-family: 'DM Mono', monospace; font-size: 14px; outline: none; transition: border-color 0.2s; }
 input:focus { border-color: rgba(245,242,235,0.5); }
-button { width: 100%; margin-top: 1.5rem; background: #f5f2eb; color: #0a0a0a; border: none; padding: 14px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; }
+button { width: 100%; margin-top: 1.5rem; background: #f5f2eb; color: #0a0a0a; border: none; padding: 14px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
 button:hover { background: #d4d0c8; }
 .err { color: #c0392b; font-size: 12px; margin-top: 1rem; min-height: 18px; }
-.sub { font-size: 12px; color: #888; margin-top: 1.5rem; text-align: center; }
-.sub a { color: #f5f2eb; }
+.login-link { font-size: 12px; color: #888; margin-top: 1.5rem; text-align: center; }
+.login-link a { color: #f5f2eb; text-decoration: none; border-bottom: 1px solid rgba(245,242,235,0.3); }
 </style>
 </head>
 <body>
 <div class="box">
   <h1>NOMAD</h1>
-  <p style="color:#888;font-size:12px;margin-bottom:2rem;">Create your account.</p>
+  <p class="sub-head">Start building your record.</p>
   <label>Full name</label>
   <input type="text" id="name" placeholder="Your name" />
   <label>Email address</label>
   <input type="email" id="email" placeholder="you@email.com" />
   <label>Phone number</label>
   <input type="tel" id="phone" placeholder="+234 000 000 0000" />
-  <label>Create PIN (4–6 digits)</label>
-  <input type="password" id="pin" placeholder="Choose a PIN" maxlength="6" />
   <button onclick="doSignup()">Create Account</button>
   <p class="err" id="err"></p>
-  <p class="sub">Already have an account? <a href="/nomad/login.html">Log in</a></p>
+  <p class="login-link">Already have an account? <a href="/nomad/login.html">Log in</a></p>
 </div>
 <script>
-async function doSignup() {
+function doSignup() {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
-  const pin = document.getElementById("pin").value.trim();
   const errEl = document.getElementById("err");
   errEl.textContent = "";
-  if (!name || !email || !phone) { errEl.textContent = "All fields required."; return; }
-  try {
-    const res = await fetch("http://localhost:5000/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phoneNumber: phone, pin, userType: "individual" })
-    });
-    const data = await res.json();
-    if (!res.ok) { errEl.textContent = data.message || "Signup failed."; return; }
-    const userId = data.user?.id || data.userId || data.user?._id;
-    if (userId) {
-      localStorage.setItem("NOMADUserId", String(userId));
-      localStorage.setItem("delayUser", JSON.stringify(data.user || {}));
-      window.location.href = "/nomad/dashboard.html";
-    } else {
-      errEl.textContent = "Signup failed — no user returned.";
-    }
-  } catch(e) {
-    errEl.textContent = "Cannot reach server.";
-  }
+  if (!name) { errEl.textContent = "Enter your name."; return; }
+  if (!email || !email.includes("@")) { errEl.textContent = "Enter a valid email."; return; }
+  if (!phone) { errEl.textContent = "Enter your phone number."; return; }
+  const user = {
+    id: "alpha_" + Date.now(),
+    name: name,
+    email: email,
+    phone: phone,
+    tier: 1,
+    score: 0,
+    streak: 0
+  };
+  localStorage.setItem("NOMADUserId", user.id);
+  localStorage.setItem("delayUser", JSON.stringify(user));
+  window.location.href = "/nomad/dashboard.html";
 }
 document.addEventListener("keydown", e => { if (e.key === "Enter") doSignup(); });
 </script>
