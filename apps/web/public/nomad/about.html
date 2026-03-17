@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOMAD — Why We Built This</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a; --white: #f5f2eb; --red: #c0392b;
+  --green: #2ecc71; --amber: #e6a817;
+  --grey: #2a2a2a; --grey-mid: #1a1a1a; --grey-light: #888;
+  --border: rgba(245,242,235,0.10); --border-strong: rgba(245,242,235,0.22);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.6; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.95); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.15em; color: var(--white); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-light); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a.active { color: var(--white); }
+.nav-cta { background: var(--white); color: var(--black); border: none; padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: #d4d0c8; }
+section { padding: 7rem 2.5rem; }
+.container { max-width: 860px; margin: 0 auto; }
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.5rem; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* HERO */
+#hero { min-height: 70vh; display: flex; align-items: center; padding-top: 120px; border-bottom: 1px solid var(--border); }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 9vw, 110px); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2.5rem; }
+.hero-title span { color: var(--red); }
+.hero-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(18px, 2.2vw, 24px); color: rgba(245,242,235,0.75); line-height: 1.65; max-width: 640px; }
+
+/* ORIGIN */
+#origin { background: #0d0d0d; border-bottom: 1px solid var(--border); }
+.origin-grid { display: grid; grid-template-columns: 100px 1fr; gap: 4rem; align-items: start; margin-top: 2rem; }
+.origin-year { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(245,242,235,0.1); line-height: 1; position: sticky; top: 100px; }
+.origin-body p { font-size: 13px; color: rgba(245,242,235,0.65); line-height: 1.9; margin-bottom: 1.5rem; }
+.origin-body p strong { color: var(--white); font-weight: 500; }
+.origin-quote { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(18px, 2vw, 22px); color: rgba(245,242,235,0.75); border-left: 3px solid var(--red); padding-left: 1.5rem; margin: 2.5rem 0; line-height: 1.5; }
+
+/* NUMBERS */
+#numbers { border-bottom: 1px solid var(--border); }
+.num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 2rem 0; }
+.num-card { background: var(--grey); padding: 2rem; }
+.num-val { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 56px); line-height: 1; margin-bottom: 8px; }
+.num-val.red { color: var(--red); }
+.num-label { font-size: 12px; color: var(--grey-light); line-height: 1.6; }
+.num-statement { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(18px, 2vw, 22px); color: rgba(245,242,235,0.65); max-width: 680px; margin-top: 2.5rem; line-height: 1.6; }
+
+/* PHILOSOPHY */
+#philosophy { background: #0d0d0d; border-bottom: 1px solid var(--border); }
+.phil-point { display: grid; grid-template-columns: 60px 1fr; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+.phil-point:last-child { border-bottom: none; }
+.phil-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(245,242,235,0.1); line-height: 1; }
+.phil-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+.phil-content p { font-size: 13px; color: var(--grey-light); line-height: 1.8; }
+.phil-content p strong { color: var(--white); font-weight: 500; }
+
+/* NOT */
+#not { border-bottom: 1px solid var(--border); }
+.not-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2rem; }
+.not-card { padding: 2rem; background: var(--grey); }
+.not-card.red-top { border-top: 2px solid var(--red); }
+.not-card.green-top { border-top: 2px solid var(--green); }
+.not-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.04em; margin-bottom: 1rem; }
+.not-card.red-top h3 { color: var(--red); }
+.not-card.green-top h3 { color: var(--green); }
+.not-card p { font-size: 12px; color: var(--grey-light); line-height: 1.8; }
+
+/* CTA */
+#cta { text-align: center; background: #0d0d0d; }
+.cta-head { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 96px); line-height: 0.92; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+.cta-head span { color: var(--red); }
+.cta-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px; color: rgba(245,242,235,0.55); margin-bottom: 3rem; }
+.btn-primary { background: var(--white); color: var(--black); border: none; padding: 14px 36px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; margin: 0 8px; }
+.btn-primary:hover { background: #d4d0c8; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--border-strong); padding: 14px 36px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; margin: 0 8px; }
+.btn-ghost:hover { border-color: var(--white); }
+
+footer { padding: 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.15em; }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-size: 11px; color: var(--grey-light); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 11px; color: var(--grey-light); }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  section { padding: 5rem 1.5rem; }
+  .origin-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .origin-year { position: static; }
+  .num-grid, .not-grid { grid-template-columns: 1fr; }
+  .phil-point { grid-template-columns: 40px 1fr; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/nomad/landing.html" class="nav-logo">NOMAD</a>
+  <div class="nav-links">
+    <a href="/nomad/rules.html">Rules</a>
+    <a href="/nomad/about.html" class="active">About</a>
+    <a href="/nomad/login.html">Login</a>
+    <a href="/nomad/signup.html" class="nav-cta">Sign Up</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <p class="eyebrow reveal">Why we built this</p>
+    <h1 class="hero-title reveal">Not a savings app.<br/>Not a <span>bank.</span></h1>
+    <p class="hero-sub reveal">Nigeria spent over ₦130 trillion in eight years. Almost none of it became capital. The problem is not that Nigerians don't earn enough. It is that the money moves too fast, in the wrong direction, without record. We built the record.</p>
+  </div>
+</section>
+
+<section id="origin">
+  <div class="container">
+    <p class="eyebrow reveal">The idea behind Nomad</p>
+    <div class="origin-grid reveal">
+      <div class="origin-year">1841</div>
+      <div class="origin-body">
+        <p>In 1841, Lewis Tappan noticed that merchants were doing business with strangers — people no one could evaluate. The question every creditor had was the same: <strong>can this person be trusted with money?</strong></p>
+        <p>Tappan built a network of observers who wrote down what they actually saw. Did merchants pay on time? Did they honor commitments under pressure? That behavioral record became the Mercantile Agency — and eventually the American credit system.</p>
+        <blockquote class="origin-quote">They did not invent wealth. They invented proof of behavior. Everything that followed — mortgages, business loans, economic mobility — was built on top of that proof system.</blockquote>
+        <p>Nigeria in 2025 has the same unsolved problem. Over <strong>40 million adults</strong> are credit-invisible — not because they are undisciplined, but because no system has been watching. Banks reject them not because they cannot manage money, but because they cannot prove they can.</p>
+        <p>Nomad is Tappan's insight rebuilt for the individual. <strong>The protocol itself is the witness.</strong> Every lock completed. Every relock honored. Every impulse resisted. Written down permanently. Yours to show.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="numbers">
+  <div class="container">
+    <p class="eyebrow reveal">The numbers nobody shows you</p>
+    <div class="num-grid reveal">
+      <div class="num-card">
+        <div class="num-val red">₦130T+</div>
+        <p class="num-label">Leaked through Nigerian household consumption in 8 years. Most of it untracked. None of it became capital.</p>
+      </div>
+      <div class="num-card">
+        <div class="num-val red">₦1T+</div>
+        <p class="num-label">Spent on sports betting annually. ₦7.93 billion per day flowing out of people's hands and returning almost nothing.</p>
+      </div>
+      <div class="num-card">
+        <div class="num-val" style="color:var(--white);">40M</div>
+        <p class="num-label">Nigerians invisible to the formal credit system. Not because of discipline failures — because no system was recording their behavior.</p>
+      </div>
+    </div>
+    <p class="num-statement reveal">"A 25-year-old Nigerian who started earning at 22 has already leaked an estimated ₦4–9 million. That money existed. It is gone. Nomad exists to stop the next ₦9 million from following it."</p>
+  </div>
+</section>
+
+<section id="philosophy">
+  <div class="container">
+    <p class="eyebrow reveal">What we know to be true</p>
+    <div class="reveal">
+      <div class="phil-point">
+        <div class="phil-num">01</div>
+        <div class="phil-content">
+          <h3>Access is the problem. Not discipline.</h3>
+          <p>Most people do not have a spending problem. They have an <strong>access problem</strong>. When money is instantly available, it is instantly vulnerable. Removing instant access does not require willpower — it requires architecture. Nomad is that architecture.</p>
+        </div>
+      </div>
+      <div class="phil-point">
+        <div class="phil-num">02</div>
+        <div class="phil-content">
+          <h3>Behavior is more valuable than balance.</h3>
+          <p>A person who locks ₦50,000 for 30 days and does not touch it is demonstrating something a bank balance cannot show. <strong>Consistency under constraint</strong> is the signal that predicts financial reliability. This is what lenders need and currently cannot see.</p>
+        </div>
+      </div>
+      <div class="phil-point">
+        <div class="phil-num">03</div>
+        <div class="phil-content">
+          <h3>The system records accurately — it does not judge.</h3>
+          <p>Early unlocks are permitted. Mistakes are allowed. What changes is the record. <strong>A clean record built over time is worth more than a perfect record built over a week.</strong> Lenders see the history, not just the score.</p>
+        </div>
+      </div>
+      <div class="phil-point">
+        <div class="phil-num">04</div>
+        <div class="phil-content">
+          <h3>Wealth passes through systems, not accounts.</h3>
+          <p>The 1% do not keep their capital liquid. <strong>Illiquidity is their strategy.</strong> Nomad translates those mechanisms into infrastructure that works at ₦1,000 entry, not $10 million.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="not">
+  <div class="container">
+    <p class="eyebrow reveal">Be clear about what this is</p>
+    <div class="not-grid reveal">
+      <div class="not-card red-top">
+        <h3>What Nomad is not</h3>
+        <p>Not a savings app that makes you feel good. Not an investment platform promising returns. Not a bank maximizing your spending velocity. Not a loyalty program with badges. Not a motivational tool. Not a product that softens the truth. Not PiggyVest with different branding.</p>
+      </div>
+      <div class="not-card green-top">
+        <h3>What Nomad is</h3>
+        <p>A behavioral discipline protocol with real consequences. A permanent record of how you handle money under pressure. An alternative credit infrastructure for people the formal system cannot see. A mirror that shows you the numbers before you can rationalize them away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="container">
+    <h2 class="cta-head reveal">The record<br/>starts<br/><span>when you do.</span></h2>
+    <p class="cta-sub reveal">Every day without a record is a day lenders cannot see.</p>
+    <div class="reveal">
+      <a href="/nomad/signup.html" class="btn-primary">Start now</a>
+      <a href="/nomad/rules.html" class="btn-ghost">Read the rules</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">NOMAD</span>
+  <div class="footer-links">
+    <a href="/nomad/rules.html">Rules</a>
+    <a href="/nomad/login.html">Login</a>
+  </div>
+  <span class="footer-copy">© 2025 Nomad — The protocol does not judge you. It records you accurately.</span>
+</footer>
+
+<script>
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.06 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
