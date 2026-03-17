@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOMAD — Conduct Rules</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a; --white: #f5f2eb; --red: #c0392b;
+  --green: #2ecc71; --amber: #e6a817;
+  --grey: #2a2a2a; --grey-mid: #1a1a1a; --grey-light: #888;
+  --border: rgba(245,242,235,0.10); --border-strong: rgba(245,242,235,0.22);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.6; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.95); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.15em; color: var(--white); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-light); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a.active { color: var(--white); }
+.nav-cta { background: var(--white); color: var(--black); border: none; padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: #d4d0c8; }
+.page-wrap { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; padding-top: 64px; }
+.sidebar { position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto; border-right: 1px solid var(--border); padding: 3rem 2rem; background: var(--grey-mid); }
+.sidebar-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.5rem; }
+.sidebar-nav { list-style: none; }
+.sidebar-nav li { margin-bottom: 2px; }
+.sidebar-nav a { display: block; font-size: 11px; letter-spacing: 0.05em; color: var(--grey-light); text-decoration: none; padding: 6px 10px; border-left: 2px solid transparent; transition: all 0.2s; line-height: 1.5; }
+.sidebar-nav a:hover { color: var(--white); border-left-color: var(--border-strong); }
+.sidebar-nav a.active { color: var(--white); border-left-color: var(--white); background: rgba(245,242,235,0.04); }
+.sidebar-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.sidebar-principle { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 12px; color: rgba(245,242,235,0.4); line-height: 1.6; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.main-content { padding: 4rem 4rem 6rem; max-width: 820px; }
+.rules-hero { margin-bottom: 5rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
+.rules-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.5rem; }
+.rules-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 6vw, 80px); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2rem; }
+.rules-title span { color: var(--red); }
+.founding-quote { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(16px, 1.8vw, 20px); color: rgba(245,242,235,0.65); line-height: 1.6; max-width: 600px; border-left: 3px solid var(--red); padding-left: 1.5rem; margin-bottom: 2rem; }
+.founding-attr { font-size: 11px; color: var(--grey-light); letter-spacing: 0.1em; padding-left: 1.5rem; margin-bottom: 2.5rem; }
+.principle-box { background: var(--grey); border-left: 3px solid var(--white); padding: 1.5rem 2rem; }
+.principle-box p { font-size: 15px; color: var(--white); line-height: 1.7; font-family: 'Instrument Serif', serif; font-style: italic; }
+.rule-section { margin-bottom: 5rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); scroll-margin-top: 100px; }
+.section-num { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 0.5rem; }
+.section-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 48px); letter-spacing: 0.03em; margin-bottom: 1.5rem; line-height: 1; }
+.section-body { font-size: 13px; color: rgba(245,242,235,0.65); line-height: 1.8; max-width: 580px; margin-bottom: 2rem; }
+.insight { background: var(--grey-mid); border: 1px solid var(--border-strong); padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 12px; color: rgba(245,242,235,0.6); line-height: 1.7; }
+.insight strong { color: var(--white); font-weight: 500; }
+.rule-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 12px; }
+.rule-table thead tr { border-bottom: 1px solid var(--border-strong); }
+.rule-table th { text-align: left; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-light); padding: 10px 16px 10px 0; font-weight: 400; }
+.rule-table td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--border); color: rgba(245,242,235,0.8); vertical-align: top; line-height: 1.6; }
+.rule-table tr:last-child td { border-bottom: none; }
+.rule-table td.num { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--white); letter-spacing: 0.05em; }
+.rule-table td.pos { color: var(--green); font-weight: 500; }
+.rule-table td.neg { color: var(--red); font-weight: 500; }
+.rule-table td.warn { color: var(--amber); font-weight: 500; }
+.rule-table td.dim { color: var(--grey-light); font-size: 11px; }
+.global-note { background: var(--grey); border-top: 2px solid var(--amber); padding: 1.75rem 2rem; margin: 2rem 0; }
+.global-note-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+.global-note p { font-size: 12px; color: rgba(245,242,235,0.65); line-height: 1.8; }
+.global-note strong { color: var(--white); font-weight: 500; }
+.points-track { margin: 2.5rem 0; position: relative; }
+.track-line { position: absolute; top: 28px; left: 0; right: 0; height: 1px; background: var(--border-strong); z-index: 0; }
+.track-nodes { display: flex; justify-content: space-between; position: relative; z-index: 1; overflow-x: auto; padding-bottom: 1rem; gap: 8px; }
+.track-node { display: flex; flex-direction: column; align-items: center; min-width: 80px; cursor: pointer; }
+.node-dot { width: 56px; height: 56px; border: 1px solid var(--border-strong); background: var(--black); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; transition: all 0.2s; }
+.track-node:hover .node-dot, .track-node.active .node-dot { background: var(--white); border-color: var(--white); }
+.track-node:hover .node-dot .node-icon, .track-node.active .node-dot .node-icon { color: var(--black); }
+.node-icon { font-size: 20px; color: var(--grey-light); transition: color 0.2s; }
+.node-label { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.08em; color: var(--grey-light); text-align: center; transition: color 0.2s; }
+.track-node:hover .node-label, .track-node.active .node-label { color: var(--white); }
+.node-pts { font-size: 10px; color: var(--grey-light); text-align: center; margin-top: 2px; }
+.level-detail { background: var(--grey); padding: 2rem; margin-top: 1.5rem; border-left: 3px solid var(--white); display: none; }
+.level-detail.visible { display: block; }
+.level-detail-name { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.05em; margin-bottom: 4px; }
+.level-detail-pts { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.25rem; }
+.level-detail-unlocks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 1rem; }
+.unlock-item { background: var(--black); padding: 10px 14px; font-size: 11px; color: rgba(245,242,235,0.7); border-left: 2px solid var(--border-strong); line-height: 1.5; }
+.failure-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin: 2rem 0; }
+.failure-card { padding: 1.75rem; background: var(--grey); border-top: 2px solid transparent; }
+.failure-card.l1 { border-top-color: var(--amber); }
+.failure-card.l2 { border-top-color: #e05c4f; }
+.failure-card.l3 { border-top-color: var(--red); }
+.failure-card.l4 { border-top-color: var(--grey-light); }
+.failure-level { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; }
+.failure-card.l1 .failure-level { color: var(--amber); }
+.failure-card.l2 .failure-level { color: #e05c4f; }
+.failure-card.l3 .failure-level { color: var(--red); }
+failure-card.l4 .failure-level { color: var(--grey-light); }
+.failure-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.04em; margin-bottom: 1rem; line-height: 1; }
+.failure-items { list-style: none; font-size: 11px; color: rgba(245,242,235,0.6); line-height: 1.8; }
+.failure-items li::before { content: '— '; color: var(--grey-light); }
+.withdrawal-box { background: var(--grey); padding: 2rem; margin: 1.5rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+.withdrawal-rule h4 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+.withdrawal-rule p { font-size: 12px; color: var(--grey-light); line-height: 1.7; }
+.bank-badge { background: var(--black); border: 1px solid var(--border-strong); padding: 10px 14px; font-size: 11px; color: rgba(245,242,235,0.7); display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.bank-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+.simulator { background: var(--grey-mid); border: 1px solid var(--border-strong); padding: 2rem; margin: 2rem 0; }
+.sim-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.5rem; }
+.sim-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.sim-control label { display: block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 6px; }
+.sim-control input { width: 100%; background: var(--black); border: 1px solid var(--border-strong); color: var(--white); padding: 8px 12px; font-family: 'DM Mono', monospace; font-size: 13px; outline: none; }
+.sim-result { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+.sim-box { background: var(--grey); padding: 1.25rem; }
+.sim-box-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 6px; }
+.sim-box-val { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; color: var(--white); }
+.sim-box-val.green { color: var(--green); }
+.sim-box-val.red { color: var(--red); }
+.sim-level { margin-top: 1rem; padding: 12px 16px; background: var(--grey); font-size: 13px; border-left: 3px solid var(--white); }
+.sim-level span { color: var(--white); font-weight: 500; }
+.final-rule { margin-top: 3rem; padding: 3rem; background: var(--grey); text-align: center; }
+.final-rule p { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 4vw, 42px); letter-spacing: 0.04em; line-height: 1.2; color: var(--white); }
+.final-rule p span { color: var(--red); }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@media (max-width: 900px) {
+  .page-wrap { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .main-content { padding: 3rem 1.5rem 5rem; }
+  .failure-grid, .sim-controls, .sim-result, .withdrawal-box, .level-detail-unlocks { grid-template-columns: 1fr; }
+  .track-nodes { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/nomad/landing.html" class="nav-logo">NOMAD</a>
+  <div class="nav-links">
+    <a href="/nomad/rules.html" class="active">Rules</a>
+    <a href="/nomad/about.html">About</a>
+    <a href="/nomad/login.html">Login</a>
+    <a href="/nomad/signup.html" class="nav-cta">Sign Up</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <p class="sidebar-title">Conduct Rules</p>
+    <ul class="sidebar-nav">
+      <li><a href="#founding" class="active">The Founding Principle</a></li>
+      <li><a href="#lock">Part 1 — The Lock</a></li>
+      <li><a href="#unlock">Part 2 — Early Unlock</a></li>
+      <li><a href="#score">Part 3 — Discipline Score</a></li>
+      <li><a href="#levels">Part 4 — Conduct Levels</a></li>
+      <li><a href="#failure">Part 5 — Failure States</a></li>
+      <li><a href="#withdrawal">Part 6 — Withdrawal Rule</a></li>
+      <li><a href="#simulator">Score Simulator</a></li>
+    </ul>
+    <hr class="sidebar-divider" />
+    <p class="sidebar-principle">"The protocol does not judge you. It records you accurately."</p>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="rules-hero" id="founding">
+      <p class="rules-eyebrow reveal">Read once. Operate clearly.</p>
+      <h1 class="rules-title reveal">NOMAD<br/>CONDUCT<br/><span>RULES</span></h1>
+      <blockquote class="founding-quote reveal">"As people moved beyond where anyone knew them personally, there needed to be a system that recorded how they actually behaved with money. Not their wealth. Their behavior."</blockquote>
+      <p class="founding-attr reveal">— Lewis Tappan, Mercantile Agency, 1841. The idea that built American credit.</p>
+      <div class="principle-box reveal">
+        <p>Nomad is that system for you. Your record here is permanent. It cannot be deleted. It can only be built — or damaged. Lenders, loan apps, and partner platforms read this record. Not your bank balance. Your behavior.</p>
+      </div>
+    </div>
+
+    <div class="rule-section" id="lock">
+      <p class="section-num reveal">Part 01</p>
+      <h2 class="section-heading reveal">The Lock</h2>
+      <p class="section-body reveal">Every deposit enters a time-lock immediately. The lock is not punishment. It is the mechanism that separates you from your impulse. Lock durations are set as a percentage of your monthly income — making the standard equal regardless of how much you earn.</p>
+      <div class="global-note reveal">
+        <p class="global-note-title">Income-relative, not amount-fixed</p>
+        <p>₦50,000 to someone earning ₦100k/month is a different decision than the same amount to someone earning ₦2M/month. <strong>The discipline standard is equal. The naira amount is not the measure — the proportion is.</strong></p>
+      </div>
+      <table class="rule-table reveal">
+        <thead><tr><th>Deposit as % of monthly income</th><th>Lock Duration</th><th>What this signals</th></tr></thead>
+        <tbody>
+          <tr><td>Up to 2%</td><td class="num">1 day</td><td class="dim">Entry level. Testing the system.</td></tr>
+          <tr><td>2% – 5%</td><td class="num">3 days</td><td class="dim">Regular habit forming.</td></tr>
+          <tr><td>5% – 10%</td><td class="num">7 days</td><td class="dim">Meaningful commitment.</td></tr>
+          <tr><td>10% – 20%</td><td class="num">14 days</td><td class="dim">Serious redirection.</td></tr>
+          <tr><td>20% – 40%</td><td class="num">30 days</td><td class="dim">Strong behavioral signal.</td></tr>
+          <tr><td>40% – 80%</td><td class="num">60 days</td><td class="dim">High conviction lock.</td></tr>
+          <tr><td>80% – 150%</td><td class="num">90 days</td><td class="dim">Capital concentration event.</td></tr>
+          <tr><td>150%+</td><td class="num">120 days</td><td class="dim">Major position. System review required.</td></tr>
+        </tbody>
+      </table>
+      <div class="insight reveal"><strong>Auto-Relock:</strong> Matured funds not touched within 6 hours re-lock automatically at half the original duration. Three notifications are sent first. The system defaults to preservation — you must actively choose to withdraw.</div>
+      <div class="insight reveal"><strong>Closed Loop:</strong> Withdrawals return only to your verified linked bank account. No peer transfers. No third-party destinations. Your money enters Nomad from one account and exits to the same account. This is non-negotiable.</div>
+    </div>
+
+    <div class="rule-section" id="unlock">
+      <p class="section-num reveal">Part 02</p>
+      <h2 class="section-heading reveal">Early Unlock</h2>
+      <p class="section-body reveal">Early unlock is permitted. Your money is always yours. But every breach is logged permanently and the cost scales with repetition. The system does not trap you. It records what you actually did.</p>
+      <table class="rule-table reveal">
+        <thead><tr><th>Situation</th><th>Fee</th><th>Record Impact</th></tr></thead>
+        <tbody>
+          <tr><td>First early unlock in any 90-day window</td><td class="warn">3% of amount</td><td class="neg">−10 points. Logged with date.</td></tr>
+          <tr><td>Second early unlock in same 90-day window</td><td class="warn">5% of amount</td><td class="neg">−25 points. Protocol Breach. Loan access suspended 60 days.</td></tr>
+          <tr><td>Third early unlock in same 90-day window</td><td class="warn">7% of amount</td><td class="neg">−50 points. Breach flag visible to lender partners for 180 days.</td></tr>
+        </tbody>
+      </table>
+      <div class="insight reveal"><strong>Breach flags do not disappear.</strong> After 180 days of clean behavior they are marked resolved — but the record remains. A lender sees the full history: the breach, the date, the resolution. This is accurate. This is the point.</div>
+    </div>
+
+    <div class="rule-section" id="score">
+      <p class="section-num reveal">Part 03</p>
+      <h2 class="section-heading reveal">Discipline Score</h2>
+      <p class="section-body reveal">Every action earns or costs points. Streaks are rewarded exponentially — because consistency over time is the entire signal lenders need.</p>
+      <table class="rule-table reveal">
+        <thead><tr><th>Action</th><th>Points</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Deposit locked</td><td class="pos">+1</td><td class="dim">Record begins.</td></tr>
+          <tr><td>Lock matures without breach</td><td class="pos">+5</td><td class="dim">Core behavior. Worth 5× the deposit action.</td></tr>
+          <tr><td>Auto-relock honored</td><td class="pos">+3</td><td class="dim">Passive discipline. You did nothing — and that was correct.</td></tr>
+          <tr><td>30-day clean streak</td><td class="pos">+15</td><td class="dim">Worth 3 completed locks. Consistency multiplier begins.</td></tr>
+          <tr><td>90-day clean streak</td><td class="pos">+50</td><td class="dim">Quarter year. Worth 10 locks. Character is confirmed.</td></tr>
+          <tr><td>180-day clean streak</td><td class="pos">+120</td><td class="dim">Half year without breach. Rare. Significant to any lender.</td></tr>
+          <tr><td>First early unlock (90-day window)</td><td class="neg">−10</td><td class="dim">Single breach. Recoverable.</td></tr>
+          <tr><td>Protocol Breach (2nd unlock)</td><td class="neg">−25</td><td class="dim">Pattern signal. Loan access paused.</td></tr>
+          <tr><td>Chronic Breach (3rd unlock)</td><td class="neg">−50</td><td class="dim">Behavioral flag. Lender-visible for 180 days.</td></tr>
+        </tbody>
+      </table>
+      <div class="insight reveal"><strong>The streak logic:</strong> A 30-day streak (+15) equals 3 completed locks. A 90-day streak (+50) equals 10 locks. A 180-day streak (+120) equals 24 locks. The longer your run, the more valuable each clean day becomes. Losing a 170-day streak costs far more than losing a 10-day streak.</div>
+    </div>
+
+    <div class="rule-section" id="levels">
+      <p class="section-num reveal">Part 04</p>
+      <h2 class="section-heading reveal">Conduct Levels</h2>
+      <p class="section-body reveal">These are not badges. They are access tiers. Each level unlocks something real — loan eligibility, lender visibility, asset access. Click any level to see what it unlocks.</p>
+      <div class="points-track reveal">
+        <div class="track-line"></div>
+        <div class="track-nodes">
+          <div class="track-node active" onclick="showLevel(0)"><div class="node-dot"><span class="node-icon">○</span></div><p class="node-label">Prospect</p><p class="node-pts">0 pts</p></div>
+          <div class="track-node" onclick="showLevel(1)"><div class="node-dot"><span class="node-icon">◎</span></div><p class="node-label">Established</p><p class="node-pts">50 pts</p></div>
+          <div class="track-node" onclick="showLevel(2)"><div class="node-dot"><span class="node-icon">◈</span></div><p class="node-label">Trusted</p><p class="node-pts">150 pts</p></div>
+          <div class="track-node" onclick="showLevel(3)"><div class="node-dot"><span class="node-icon">⬡</span></div><p class="node-label">Proven</p><p class="node-pts">350 pts</p></div>
+          <div class="track-node" onclick="showLevel(4)"><div class="node-dot"><span class="node-icon">◆</span></div><p class="node-label">Recognized</p><p class="node-pts">700 pts</p></div>
+          <div class="track-node" onclick="showLevel(5)"><div class="node-dot"><span class="node-icon">★</span></div><p class="node-label">Distinguished</p><p class="node-pts">1,200 pts</p></div>
+          <div class="track-node" onclick="showLevel(6)"><div class="node-dot"><span class="node-icon">⬟</span></div><p class="node-label">Sovereign</p><p class="node-pts">2,000 pts</p></div>
+        </div>
+      </div>
+      <div class="level-detail visible" id="level-detail">
+        <div class="level-detail-name" id="ld-name">Prospect</div>
+        <div class="level-detail-pts" id="ld-pts">0 points required — account active, record begins</div>
+        <div class="level-detail-unlocks" id="ld-unlocks"></div>
+      </div>
+    </div>
+
+    <div class="rule-section" id="failure">
+      <p class="section-num reveal">Part 05</p>
+      <h2 class="section-heading reveal">Failure States</h2>
+      <p class="section-body reveal">A failure state is not just a point deduction. It changes what the system shows to lenders. Failure is permitted — it is recorded accurately.</p>
+      <div class="failure-grid reveal">
+        <div class="failure-card l1"><p class="failure-level">Level 1</p><p class="failure-name">Single Breach</p><ul class="failure-items"><li>First early unlock in 90-day window</li><li>−10 points deducted</li><li>Logged with date and amount</li><li>Recoverable within same period</li></ul></div>
+        <div class="failure-card l2"><p class="failure-level">Level 2</p><p class="failure-name">Pattern Breach</p><ul class="failure-items"><li>Second early unlock in same 90-day window</li><li>−25 points deducted</li><li>Protocol Breach flag triggered</li><li>Loan access suspended 60 days regardless of score</li></ul></div>
+        <div class="failure-card l3"><p class="failure-level">Level 3</p><p class="failure-name">Chronic Breach</p><ul class="failure-items"><li>Third early unlock in same 90-day window</li><li>−50 points deducted</li><li>Breach flag visible to all lender partners</li><li>Flag active for 180 days of clean behavior</li><li>Cannot advance conduct levels during flag period</li></ul></div>
+        <div class="failure-card l4"><p class="failure-level">Level 4</p><p class="failure-name">Dormancy</p><ul class="failure-items"><li>Account inactive 90+ days with locked funds</li><li>3 notifications over 7-day window</li><li>No response triggers safety auto-relock</li><li>Dormancy period noted on record</li></ul></div>
+      </div>
+      <div class="insight reveal"><strong>Breach flags resolve — they do not disappear.</strong> After the 180-day clean period the flag is marked resolved. The original breach date, amount, and context remain permanently on file. A lender reading your record in year three sees year one clearly. This is not punitive — it is accurate.</div>
+    </div>
+
+    <div class="rule-section" id="withdrawal">
+      <p class="section-num reveal">Part 06</p>
+      <h2 class="section-heading reveal">The Withdrawal Rule</h2>
+      <p class="section-body reveal">You can always withdraw matured funds to your verified bank account. This is non-negotiable. Your money is yours. What changes is your record.</p>
+      <div class="withdrawal-box reveal">
+        <div class="withdrawal-rule">
+          <h4>Closed Loop. Always.</h4>
+          <p>Withdrawals return to your verified linked account only. No peer transfers. No third-party destinations. The narrow transfer surface protects your capital from social pressure — no one can ask you to send money from your Nomad balance directly.</p>
+        </div>
+        <div>
+          <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey-light);margin-bottom:12px;">Supported banks</p>
+          <div class="bank-badge"><div class="bank-dot"></div>Access Bank</div>
+          <div class="bank-badge"><div class="bank-dot"></div>GTBank</div>
+          <div class="bank-badge"><div class="bank-dot"></div>Zenith Bank</div>
+          <div class="bank-badge"><div class="bank-dot"></div>First Bank</div>
+          <div class="bank-badge"><div class="bank-dot"></div>UBA</div>
+          <div class="bank-badge"><div class="bank-dot"></div>Kuda Bank</div>
+          <div class="bank-badge"><div class="bank-dot"></div>OPay</div>
+          <div class="bank-badge"><div class="bank-dot"></div>Moniepoint</div>
+        </div>
+      </div>
+      <div class="insight reveal"><strong>The withdrawal pattern is also your record.</strong> Consistently relocking matured funds builds a fundamentally different profile than withdrawing everything immediately. Both are permitted. Only one builds toward Sovereign.</div>
+    </div>
+
+    <div class="rule-section" id="simulator" style="border-bottom:none;margin-bottom:2rem;">
+      <p class="section-num reveal">Simulator</p>
+      <h2 class="section-heading reveal">Score Simulator</h2>
+      <p class="section-body reveal">See how your behavior builds — or damages — your conduct record.</p>
+      <div class="simulator reveal">
+        <p class="sim-title">Build your scenario</p>
+        <div class="sim-controls">
+          <div class="sim-control"><label>Locks completed (clean)</label><input type="number" id="s-locks" value="12" min="0" max="200" /></div>
+          <div class="sim-control"><label>30-day streaks achieved</label><input type="number" id="s-streaks" value="3" min="0" max="24" /></div>
+          <div class="sim-control"><label>Early unlocks triggered</label><input type="number" id="s-breaches" value="0" min="0" max="20" /></div>
+        </div>
+        <div class="sim-result">
+          <div class="sim-box"><p class="sim-box-label">Total Score</p><div class="sim-box-val green" id="s-score">0</div></div>
+          <div class="sim-box"><p class="sim-box-label">Points Earned</p><div class="sim-box-val" id="s-earned">0</div></div>
+          <div class="sim-box"><p class="sim-box-label">Points Lost</p><div class="sim-box-val red" id="s-lost">0</div></div>
+        </div>
+        <div class="sim-level" id="s-level">Your conduct level will appear here.</div>
+      </div>
+      <div class="final-rule reveal">
+        <p>"The protocol does not<br/>judge you.<br/><span>It records you accurately.</span>"</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const levels = [
+  { name: 'Prospect', pts: '0 points required — account active, record begins', unlocks: ['Record creation begins', 'Lock engine active', 'Dashboard access', 'Discipline score tracking starts'] },
+  { name: 'Established', pts: '50 points required', unlocks: ['Score visible to partner lenders', 'Loan preview waitlist', 'Behavioral history (30 days)', 'Auto-relock dashboard visible'] },
+  { name: 'Trusted', pts: '150 points required', unlocks: ['Micro-loan eligibility preview', 'Small peer-to-peer loan access', 'Behavioral history (90 days)', 'Phase 2 early briefing'] },
+  { name: 'Proven', pts: '350 points required', unlocks: ['Standard loan access via partners', 'Community capital pool entry', 'Full behavioral history to lenders', 'Higher protocol flexibility'] },
+  { name: 'Recognized', pts: '700 points required', unlocks: ['Preferred loan terms', 'Phase 2 asset access — early window', 'Private conduct record summary', 'Tax vault advanced features'] },
+  { name: 'Distinguished', pts: '1,200 points required', unlocks: ['Alternative credit tier — lender direct', 'Peer lending eligibility', 'Advanced RWA allocation window', 'Priority support'] },
+  { name: 'Sovereign', pts: '2,000 points required', unlocks: ['Full behavioral credit — all lenders', 'High-value RWA access', 'Dynasty lock activation', 'Private client guidance'] }
+];
+
+function showLevel(idx) {
+  document.querySelectorAll('.track-node').forEach((n, i) => n.classList.toggle('active', i === idx));
+  const l = levels[idx];
+  document.getElementById('ld-name').textContent = l.name;
+  document.getElementById('ld-pts').textContent = l.pts;
+  document.getElementById('ld-unlocks').innerHTML = l.unlocks.map(u => `<div class="unlock-item">${u}</div>`).join('');
+}
+showLevel(0);
+
+function calcSim() {
+  const locks = parseInt(document.getElementById('s-locks').value) || 0;
+  const streaks = parseInt(document.getElementById('s-streaks').value) || 0;
+  const breaches = parseInt(document.getElementById('s-breaches').value) || 0;
+  const earned = (locks * 6) + (streaks * 15);
+  const lost = breaches === 0 ? 0 : breaches === 1 ? 10 : breaches === 2 ? 35 : 35 + ((breaches - 2) * 50);
+  const score = Math.max(0, earned - lost);
+  document.getElementById('s-score').textContent = score;
+  document.getElementById('s-earned').textContent = '+' + earned;
+  document.getElementById('s-lost').textContent = lost > 0 ? '−' + lost : '0';
+  const thresholds = [0, 50, 150, 350, 700, 1200, 2000];
+  let levelIdx = 0;
+  for (let i = thresholds.length - 1; i >= 0; i--) { if (score >= thresholds[i]) { levelIdx = i; break; } }
+  const nextThreshold = thresholds.find(t => t > score);
+  const nextText = nextThreshold ? ` — <span>${nextThreshold - score} points to ${levels[thresholds.indexOf(nextThreshold)].name}</span>` : ' — <span>Maximum level achieved.</span>';
+  document.getElementById('s-level').innerHTML = `Current level: <span>${levels[levelIdx].name}</span>${nextText}`;
+}
+document.querySelectorAll('#s-locks, #s-streaks, #s-breaches').forEach(el => el.addEventListener('input', calcSim));
+calcSim();
+
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.06 });
+revealEls.forEach(el => observer.observe(el));
+
+const sideLinks = document.querySelectorAll('.sidebar-nav a');
+const sections = document.querySelectorAll('.rule-section, .rules-hero');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  sideLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+});
+</script>
+</body>
+</html>
