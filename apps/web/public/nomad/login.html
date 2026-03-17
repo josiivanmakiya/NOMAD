@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOMAD — Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a; --white: #f5f2eb; --red: #c0392b;
+  --grey: #2a2a2a; --grey-light: #888; --border: rgba(245,242,235,0.10);
+}
+body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.6; min-height: 100vh; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.95); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.15em; color: var(--white); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-light); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a.active { color: var(--white); }
+.nav-cta { background: var(--white); color: var(--black); border: none; padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: #d4d0c8; }
+.main { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 8rem 2.5rem 4rem; }
+.card { width: min(460px, 100%); background: var(--grey); padding: 2.5rem; border: 1px solid var(--border); }
+.title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 64px); letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+.sub { color: var(--grey-light); margin-bottom: 2rem; }
+.label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 6px; }
+.input { width: 100%; background: #0a0a0a; border: 1px solid var(--border); color: var(--white); padding: 12px 14px; font-family: 'DM Mono', monospace; margin-bottom: 1.25rem; }
+.btn { width: 100%; background: var(--white); color: var(--black); border: none; padding: 12px 16px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
+.help { margin-top: 1.5rem; font-size: 12px; color: var(--grey-light); text-align: center; }
+.help a { color: var(--white); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/nomad/landing.html" class="nav-logo">NOMAD</a>
+  <div class="nav-links">
+    <a href="/nomad/rules.html">Rules</a>
+    <a href="/nomad/about.html">About</a>
+    <a href="/nomad/login.html" class="active">Login</a>
+    <a href="/nomad/signup.html" class="nav-cta">Sign Up</a>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="card">
+    <h1 class="title">Login</h1>
+    <p class="sub">Access your record.</p>
+
+    <label class="label" for="email">Email</label>
+    <input id="email" type="email" class="input" placeholder="you@email.com" />
+
+    <label class="label" for="password">Password</label>
+    <input id="password" type="password" class="input" placeholder="••••••••" />
+
+    <button class="btn">Continue</button>
+
+    <div class="help">No account yet? <a href="/nomad/signup.html">Sign up</a></div>
+  </div>
+</main>
+</body>
+</html>
