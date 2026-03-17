@@ -3,1378 +3,179 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NOMAD — Control Your Money Before It Controls You</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<title>NOMAD</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --black: #0a0a0a;
-    --white: #f5f2eb;
-    --red: #c0392b;
-    --red-dim: #7a1f16;
-    --green: #1a7a4a;
-    --green-bright: #2ecc71;
-    --grey: #2a2a2a;
-    --grey-mid: #444;
-    --grey-light: #888;
-    --border: rgba(245,242,235,0.12);
-    --border-strong: rgba(245,242,235,0.25);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Mono', monospace;
-    font-size: 14px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2.5rem;
-    background: rgba(10,10,10,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 0.15em;
-    color: var(--white);
-    text-decoration: none;
-  }
-
-  .nav-cta {
-    background: var(--white);
-    color: var(--black);
-    border: none;
-    padding: 8px 20px;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .nav-cta:hover { background: #d4d0c8; }
-
-  /* SECTIONS */
-  section { padding: 7rem 2.5rem; }
-
-  .container { max-width: 960px; margin: 0 auto; }
-
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 120px;
-    padding-bottom: 80px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  #hero::before {
-    content: 'NOMAD';
-    position: absolute;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(120px, 22vw, 320px);
-    color: rgba(245,242,235,0.025);
-    right: -2%;
-    top: 50%;
-    transform: translateY(-50%);
-    letter-spacing: 0.05em;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .hero-tag {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    margin-bottom: 2rem;
-  }
-
-  .hero-headline {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(56px, 9vw, 120px);
-    line-height: 0.92;
-    letter-spacing: 0.02em;
-    margin-bottom: 2.5rem;
-    max-width: 820px;
-  }
-
-  .hero-headline .accent { color: var(--red); }
-
-  .hero-sub {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: clamp(18px, 2.2vw, 24px);
-    color: rgba(245,242,235,0.85);
-    max-width: 540px;
-    margin-bottom: 3rem;
-    line-height: 1.5;
-  }
-
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-
-  .btn-primary {
-    background: var(--white);
-    color: var(--black);
-    border: none;
-    padding: 14px 32px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-primary:hover { background: #d4d0c8; transform: translateY(-1px); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--white);
-    border: 1px solid var(--border-strong);
-    padding: 14px 32px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-ghost:hover { border-color: var(--white); }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 2.5rem;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--grey-light);
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .hero-scroll::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--grey-light);
-  }
-
-  /* MACRO SECTION */
-  #macro {
-    border-bottom: 1px solid var(--border);
-    background: #0d0d0d;
-  }
-
-  .section-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 5vw, 60px);
-    letter-spacing: 0.03em;
-    margin-bottom: 1rem;
-    line-height: 1.05;
-  }
-
-  .macro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin: 3rem 0;
-  }
-
-  .macro-card {
-    padding: 2.5rem;
-    background: var(--grey);
-  }
-
-  .macro-card.leak { border-top: 3px solid var(--red); }
-  .macro-card.capital { border-top: 3px solid var(--green); }
-
-  .macro-label {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    margin-bottom: 1rem;
-  }
-
-  .macro-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 7vw, 88px);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-
-  .macro-card.leak .macro-number { color: var(--red); }
-  .macro-card.capital .macro-number { color: var(--green-bright); }
-
-  .macro-desc {
-    font-size: 12px;
-    color: var(--grey-light);
-    line-height: 1.6;
-  }
-
-  .macro-insight {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: clamp(18px, 2.5vw, 26px);
-    color: rgba(245,242,235,0.75);
-    border-left: 3px solid var(--red);
-    padding-left: 1.5rem;
-    margin: 3rem 0;
-    line-height: 1.5;
-    max-width: 680px;
-  }
-
-  .stat-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 3rem;
-  }
-
-  .stat-box {
-    background: var(--grey);
-    padding: 1.5rem;
-  }
-
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--grey-light);
-    letter-spacing: 0.05em;
-  }
-
-  /* CALCULATOR */
-  #calculator {
-    border-bottom: 1px solid var(--border);
-  }
-
-  .calc-intro {
-    max-width: 600px;
-    margin-bottom: 3.5rem;
-  }
-
-  .calc-intro p {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: rgba(245,242,235,0.85);
-    margin-top: 1rem;
-    line-height: 1.6;
-  }
-
-  .calc-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-  }
-
-  .calc-inputs {
-    background: var(--grey);
-    padding: 2.5rem;
-  }
-
-  .calc-results {
-    background: #111;
-    padding: 2.5rem;
-    border: 1px solid var(--border);
-  }
-
-  .input-row {
-    margin-bottom: 1.5rem;
-  }
-
-  .input-row label {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    margin-bottom: 8px;
-  }
-
-  .input-row input,
-  .input-row select {
-    width: 100%;
-    background: var(--black);
-    border: 1px solid var(--border-strong);
-    color: var(--white);
-    padding: 10px 14px;
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .input-row input:focus,
-  .input-row select:focus { border-color: rgba(245,242,235,0.85); }
-
-  .input-row select option { background: #1a1a1a; }
-
-  .leak-grid-calc {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 0.5rem;
-  }
-
-  .leak-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--black);
-    border: 1px solid var(--border);
-    padding: 8px 12px;
-  }
-
-  .leak-row span {
-    font-size: 11px;
-    color: var(--grey-light);
-    letter-spacing: 0.05em;
-  }
-
-  .leak-row input {
-    width: 80px;
-    background: transparent;
-    border: none;
-    color: var(--white);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    text-align: right;
-    outline: none;
-  }
-
-  .result-block { margin-bottom: 2rem; }
-
-  .result-tag {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    margin-bottom: 8px;
-  }
-
-  .result-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 52px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .result-number.red { color: var(--red); }
-  .result-number.green { color: var(--green-bright); }
-
-  .result-sub {
-    font-size: 11px;
-    color: var(--grey-light);
-    line-height: 1.5;
-  }
-
-  .divider-line {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 1.5rem 0;
-  }
-
-  .paths-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 1rem;
-  }
-
-  .path-col { }
-
-  .path-head {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 8px 0;
-    margin-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .path-head.red { color: var(--red); }
-  .path-head.green { color: var(--green-bright); }
-
-  .path-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 6px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .path-yr { font-size: 10px; color: var(--grey-light); }
-
-  .path-val { font-size: 13px; font-weight: 500; }
-  .path-val.red { color: #e05c4f; }
-  .path-val.green { color: var(--green-bright); }
-
-  .verdict-box {
-    background: var(--grey);
-    border-left: 3px solid var(--white);
-    padding: 1.25rem 1.5rem;
-    margin-top: 1.5rem;
-    font-size: 12px;
-    color: rgba(245,242,235,0.75);
-    line-height: 1.7;
-  }
-
-  .verdict-box strong { color: var(--white); }
-
-  /* HOW IT WORKS */
-  #how {
-    border-bottom: 1px solid var(--border);
-    background: #0d0d0d;
-  }
-
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 3rem;
-  }
-
-  .step-card {
-    background: var(--grey);
-    padding: 2rem;
-    position: relative;
-  }
-
-  .step-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 72px;
-    color: rgba(245,242,235,0.06);
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .step-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.03em;
-    margin-bottom: 1rem;
-    color: var(--white);
-  }
-
-  .step-body {
-    font-size: 12px;
-    color: var(--grey-light);
-    line-height: 1.7;
-  }
-
-  /* POINTS / CREDIT */
-  #points {
-    border-bottom: 1px solid var(--border);
-  }
-
-  .points-intro {
-    max-width: 640px;
-    margin-bottom: 3rem;
-  }
-
-  .levels-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    margin-top: 2rem;
-  }
-
-  .level-card {
-    background: var(--grey);
-    padding: 1.5rem;
-    border-top: 2px solid transparent;
-    transition: border-color 0.2s;
-  }
-
-  .level-card:hover { border-top-color: var(--white); }
-
-  .level-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-  }
-
-  .level-pts {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--grey-light);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .level-benefit {
-    font-size: 11px;
-    color: rgba(245,242,235,0.85);
-    line-height: 1.6;
-  }
-
-  .credit-insight {
-    margin-top: 3rem;
-    background: var(--grey);
-    padding: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  .credit-insight h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 0.03em;
-    margin-bottom: 1rem;
-    line-height: 1.1;
-  }
-
-  .credit-insight p {
-    font-size: 12px;
-    color: var(--grey-light);
-    line-height: 1.8;
-  }
-
-  .credit-proof {
-    border-left: 1px solid var(--border-strong);
-    padding-left: 2rem;
-  }
-
-  .proof-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 12px;
-  }
-
-  .proof-label { color: var(--grey-light); }
-  .proof-val { color: var(--green-bright); }
-
-  /* WAITLIST */
-  #waitlist {
-    background: #0d0d0d;
-  }
-
-  .waitlist-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .waitlist-left h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1;
-    letter-spacing: 0.02em;
-    margin-bottom: 1.5rem;
-  }
-
-  .waitlist-left p {
-    font-size: 13px;
-    color: var(--grey-light);
-    line-height: 1.8;
-    margin-bottom: 0.75rem;
-  }
-
-  .waitlist-form { }
-
-  .form-row { margin-bottom: 1rem; }
-
-  .form-row label {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    margin-bottom: 6px;
-  }
-
-  .form-row input,
-  .form-row select {
-    width: 100%;
-    background: var(--grey);
-    border: 1px solid var(--border-strong);
-    color: var(--white);
-    padding: 12px 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .form-row input:focus,
-  .form-row select:focus { border-color: rgba(245,242,235,0.85); }
-
-  .form-row select option { background: #1a1a1a; }
-
-  .form-2col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .form-submit {
-    width: 100%;
-    background: var(--white);
-    color: var(--black);
-    border: none;
-    padding: 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background 0.2s;
-  }
-
-  .form-submit:hover { background: #d4d0c8; }
-
-  .form-note {
-    font-size: 10px;
-    color: var(--grey-light);
-    margin-top: 0.75rem;
-    line-height: 1.6;
-    letter-spacing: 0.03em;
-  }
-
-  .success-msg {
-    display: none;
-    background: var(--grey);
-    border-left: 3px solid var(--green-bright);
-    padding: 1.5rem;
-    font-size: 13px;
-    color: var(--green-bright);
-    line-height: 1.6;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 2.5rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 0.15em;
-    color: var(--white);
-  }
-
-  .footer-copy {
-    font-size: 11px;
-    color: var(--grey-light);
-    letter-spacing: 0.05em;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .footer-links a {
-    font-size: 11px;
-    color: var(--grey-light);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .footer-links a:hover { color: var(--white); }
-
-  /* ANIMATIONS */
-  .reveal {
-    opacity: 1;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    section { padding: 5rem 1.5rem; }
-    nav { padding: 1rem 1.5rem; }
-    .macro-grid, .calc-body, .steps-grid, .levels-grid,
-    .waitlist-grid, .credit-insight { grid-template-columns: 1fr; }
-    .stat-row { grid-template-columns: 1fr 1fr; }
-    .paths-grid { grid-template-columns: 1fr; }
-    .form-2col { grid-template-columns: 1fr; }
-    .credit-proof { border-left: none; border-top: 1px solid var(--border-strong); padding-left: 0; padding-top: 2rem; }
-    footer { flex-direction: column; align-items: flex-start; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a; --white: #f5f2eb; --red: #c0392b;
+  --green: #2ecc71; --amber: #e6a817; --grey: #2a2a2a;
+  --grey-mid: #1a1a1a; --grey-light: #888;
+  --border: rgba(245,242,235,0.10); --border-strong: rgba(245,242,235,0.22);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.6; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.95); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.15em; color: var(--white); text-decoration: none; }
+.nav-right { display: flex; gap: 1rem; align-items: center; }
+.nav-link { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-light); text-decoration: none; transition: color 0.2s; }
+.nav-link:hover { color: var(--white); }
+.btn-nav { background: var(--white); color: var(--black); border: none; padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; }
+#hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 2.5rem 80px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+#hero::before { content: 'NOMAD'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: clamp(120px, 22vw, 320px); color: rgba(245,242,235,0.025); right: -2%; top: 50%; transform: translateY(-50%); pointer-events: none; user-select: none; }
+.hero-inner { max-width: 820px; }
+.hero-tag { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 2rem; }
+.hero-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 120px); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2.5rem; }
+.hero-headline .accent { color: var(--red); }
+.hero-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(18px, 2.2vw, 24px); color: rgba(245,242,235,0.85); max-width: 540px; margin-bottom: 3rem; line-height: 1.5; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.btn-primary { background: var(--white); color: var(--black); border: none; padding: 14px 32px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
+.btn-primary:hover { background: #d4d0c8; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--border-strong); padding: 14px 32px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
+.btn-ghost:hover { border-color: var(--white); }
+section { padding: 6rem 2.5rem; border-bottom: 1px solid var(--border); }
+.container { max-width: 960px; margin: 0 auto; }
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.5rem; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 6vw, 72px); line-height: 0.95; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+.section-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(16px, 1.8vw, 20px); color: rgba(245,242,235,0.8); max-width: 560px; line-height: 1.6; margin-bottom: 3rem; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; margin-top: 2rem; }
+.step { background: var(--grey); padding: 2rem; }
+.step-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(245,242,235,0.15); line-height: 1; margin-bottom: 1rem; }
+.step-title { font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.step-body { font-size: 12px; color: rgba(245,242,235,0.7); line-height: 1.7; }
+.hooks { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2rem; }
+.hook { background: var(--grey-mid); padding: 2rem; border-left: 2px solid var(--border-strong); }
+.hook-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px, 3vw, 32px); line-height: 1.1; letter-spacing: 0.03em; margin-bottom: 0.75rem; }
+.hook-sub { font-size: 12px; color: rgba(245,242,235,0.6); line-height: 1.6; }
+.cta-block { background: var(--grey-mid); padding: 5rem 2.5rem; text-align: center; border-bottom: none; }
+.cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 100px); line-height: 0.92; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+.cta-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px; color: rgba(245,242,235,0.7); margin-bottom: 3rem; }
+footer { padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.15em; }
+.footer-copy { font-size: 11px; color: var(--grey-light); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 11px; color: var(--grey-light); text-decoration: none; letter-spacing: 0.05em; }
+.footer-links a:hover { color: var(--white); }
+@media (max-width: 600px) {
+  nav { padding: 1rem 1.5rem; }
+  #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hooks { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav style="display:flex;align-items:center;justify-content:space-between;gap:2rem;">
-  <div style="display:flex;align-items:center;gap:2rem;">
-    <a href="#" class="nav-logo">NOMAD</a>
-    <div style="display:flex;gap:2rem;align-items:center;">
-      <a href="#how" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-light);text-decoration:none;">How it works</a>
-      <a href="#points" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-light);text-decoration:none;">Credit Score</a>
-      <a href="#waitlist" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#ffffff;text-decoration:none;">Join Waitlist</a>
-    </div>
-  </div>
-  <div style="display:flex;gap:1.5rem;align-items:center;">
-    <a href="/login" style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey-light);text-decoration:none;">Login</a>
-    <a href="/signup" style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#ffffff;text-decoration:none;border:1px solid rgba(245,242,235,0.35);padding:0.5rem 1rem;">Sign Up</a>
+<nav>
+  <a href="/nomad/landing.html" class="nav-logo">NOMAD</a>
+  <div class="nav-right">
+    <a href="/nomad/rules.html" class="nav-link">Rules</a>
+    <a href="/nomad/signup.html" class="btn-nav">Enter</a>
   </div>
 </nav>
 
-<!-- SELF-AWARENESS HERO (INSERTED) -->
-<section style="background:#070707;padding:4rem 2.5rem 3rem;border-bottom:1px solid rgba(245,242,235,0.12);">
-  <div style="max-width:1100px;margin:0 auto;">
-  <p style="font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:#888;margin:3.5rem 0 1.5rem;font-family:'DM Mono',monospace;">Financial Accountability Partner</p>
-    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,110px);line-height:0.9;color:#ffffff;margin-bottom:1rem;letter-spacing:0.02em;">
-      A question worth asking —
-      <br/>WHERE DOES YOUR
-      <span style="color:#c0392b;"> money </span>
-      REALLY GO?
-    </h1>
-    <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(245,242,235,0.75);max-width:780px;line-height:1.6;">
-      Small daily leaks can either disappear into nothing — or build something that outlasts you. The math is brutal. The choice is simple.
-    </p>
-  </div>
-</section>
-
-<!-- HERO -->
 <section id="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">Behavioral Finance Infrastructure — Nigeria</p>
+    <h1 class="hero-headline">Your money<br/>is <span class="accent">leaving</span><br/>without you.</h1>
+    <p class="hero-sub">You do not have a spending problem. You have an access problem. Nomad puts friction between your money and your impulse — and builds a permanent record of what happens.</p>
+    <div class="hero-actions">
+      <a href="/nomad/signup.html" class="btn-primary">Start Building Your Record</a>
+      <a href="/nomad/rules.html" class="btn-ghost">Read the Rules</a>
+    </div>
+  </div>
+</section>
+
+<section>
   <div class="container">
-    <p class="hero-tag reveal">Financial Accountability Infrastructure — Nigeria</p>
-    <h1 class="hero-headline reveal">
-      Your money<br/>is leaving<br/><span class="accent">without you.</span>
-    </h1>
-    <p class="hero-sub reveal">
-      Small daily leaks compound into millions of naira lost. Nomad shows you the number — then helps you stop it.
-    </p>
-    <div class="hero-actions reveal">
-      <button class="btn-primary" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">See Your Number</button>
-      <a href="#how" class="btn-ghost">How It Works</a>
-    </div>
-  </div>
-  <div class="hero-scroll">Scroll to see the data</div>
-</section>
-
-<!-- MACRO -->
-
-<section style="background:#080808;padding:6rem 2.5rem;border-bottom:2px solid #c0392b;">
-  <div style="max-width:960px;margin:0 auto;">
-    <p style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:2rem;font-family:'DM Mono',monospace;">The Brutal Truth — Nigeria 2025</p>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,120px);line-height:0.88;color:#ffffff;margin-bottom:1rem;letter-spacing:0.02em;font-weight:900;">The average Nigerian<br/>leaks <span style="color:#c0392b;">₦4,000</span><br/>every single day.</h2>
-    <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(245,242,235,0.7);margin-bottom:3rem;line-height:1.6;max-width:600px;">That is not a spending problem. That is an access problem. And it compounds every year you ignore it.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:3rem;">
-      <div style="background:#1a1a1a;padding:2.5rem 2rem;border-top:3px solid #c0392b;">
-        <p style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:1rem;font-family:'DM Mono',monospace;">This year alone</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,72px);color:#c0392b;line-height:0.9;margin-bottom:0.5rem;font-weight:900;">₦1.46M</p>
-        <p style="font-size:12px;color:#888;font-family:'DM Mono',monospace;line-height:1.6;">Leaked. Gone. Nothing to show for it.</p>
+    <p class="eyebrow">The mechanism</p>
+    <h2 class="section-title">Discipline<br/>by structure.<br/>Not motivation.</h2>
+    <p class="section-sub">You do not need to stop spending. You need to redirect one habit. That single redirection, held consistently, builds your capital and your record at the same time.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Lock</div>
+        <div class="step-body">Deposits become time-locked. The larger the amount relative to your income, the longer the lock. Impulse cannot reach what time protects. This is not willpower — it is architecture.</div>
       </div>
-      <div style="background:#1a1a1a;padding:2.5rem 2rem;border-top:3px solid #c0392b;">
-        <p style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:1rem;font-family:'DM Mono',monospace;">In 5 years</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,72px);color:#c0392b;line-height:0.9;margin-bottom:0.5rem;font-weight:900;">₦7.3M</p>
-        <p style="font-size:12px;color:#888;font-family:'DM Mono',monospace;line-height:1.6;">At the same daily rate. Compounding downward.</p>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Wait</div>
+        <div class="step-body">The 24-hour decision window is where most financial damage happens. By the time your lock matures, the pressure is usually gone. The system does not judge you. It records you accurately.</div>
       </div>
-      <div style="background:#1a1a1a;padding:2.5rem 2rem;border-top:3px solid #c0392b;">
-        <p style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:1rem;font-family:'DM Mono',monospace;">In 20 years</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,72px);color:#c0392b;line-height:0.9;margin-bottom:0.5rem;font-weight:900;">₦29M</p>
-        <p style="font-size:12px;color:#888;font-family:'DM Mono',monospace;line-height:1.6;">If you are average. Most people reading this are worse.</p>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Build</div>
+        <div class="step-body">Every completed lock. Every relock honored. Every impulse resisted. Written permanently as your discipline score. This is your behavioral credit file — built in real time from what you actually do.</div>
       </div>
-    </div>
-    <div style="background:#0a0a0a;border-left:4px solid #ffffff;padding:2rem 2.5rem;margin-bottom:3rem;">
-      <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2vw,24px);color:#ffffff;line-height:1.7;">You are reading this which means you already suspect your number is higher than the average.<br/>Find out exactly what you have already lost — and what the next 20 years look like if nothing changes.</p>
-    </div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;">
-      <a href="#calculator" style="display:inline-block;background:#ffffff;color:#0a0a0a;padding:16px 40px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;text-decoration:none;font-weight:700;">Calculate My Number →</a>
-      <a href="#macro" style="display:inline-block;background:transparent;color:#f5f2eb;border:1px solid rgba(245,242,235,0.3);padding:16px 40px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;text-decoration:none;">See Nigeria's Data</a>
     </div>
   </div>
 </section>
 
-
-
-
-
-
-<section id="macro">
+<section style="background:#0d0d0d;">
   <div class="container">
-    <p class="section-eyebrow reveal">Nigeria — 2013 to 2023</p>
-    <h2 class="section-title reveal">The same decade.<br/>Two different destinies.</h2>
-
-    <div class="macro-grid reveal">
-      <div class="macro-card leak">
-        <p class="macro-label">Consumption — Leaks</p>
-        <div class="macro-number">₦100T+</div>
-        <p class="macro-desc">Household spending over 10 years. Food, transport, betting, impulse spending, subscriptions, airtime. Money that flowed out and did not return.</p>
+    <p class="eyebrow">What this is</p>
+    <div class="hooks">
+      <div class="hook">
+        <div class="hook-text">You are not your salary. You are your pattern.</div>
+        <div class="hook-sub">A person who locks ₦50,000 for 30 days and does not touch it is demonstrating something a bank balance cannot show. That consistency is the signal lenders need and currently cannot see.</div>
       </div>
-      <div class="macro-card capital">
-        <p class="macro-label">Investment Returns — Capital</p>
-        <div class="macro-number">₦25–40T+</div>
-        <p class="macro-desc">Formal market and pension portfolio growth over the same period. Money that compounded for those who redirected it. Same naira. Different system.</p>
+      <div class="hook">
+        <div class="hook-text">Behavior is more valuable than balance.</div>
+        <div class="hook-sub">40 million Nigerians are invisible to the formal credit system. Not because they are undisciplined — because no system was recording their behavior. Nomad is that system.</div>
       </div>
-    </div>
-
-    <blockquote class="macro-insight reveal">
-      "Most Nigerians spent money without realizing the other path existed."
-    </blockquote>
-
-    <div class="stat-row reveal">
-      <div class="stat-box">
-        <div class="stat-num">₦1T+</div>
-        <p class="stat-label">Nigerians spend on sports betting annually</p>
+      <div class="hook">
+        <div class="hook-text">The protocol does not judge you. It records you accurately.</div>
+        <div class="hook-sub">Early unlocks are permitted. Your money is always yours. What changes is the record. Every action is logged permanently — the good and the bad. A clean record built over time is worth more than a perfect record built over a week.</div>
       </div>
-      <div class="stat-box">
-        <div class="stat-num">₦2.6T</div>
-        <p class="stat-label">Airtime and data spend in 9 months of 2023 alone</p>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">40M+</div>
-        <p class="stat-label">Adults with no formal credit history — invisible to lenders</p>
+      <div class="hook">
+        <div class="hook-text">Redirect one leak. Not all of them.</div>
+        <div class="hook-sub">You do not need to become disciplined overnight. You do not need to give up anything you enjoy. You need to redirect one habit into the lock layer. That one redirection, held consistently, does two things at once.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CALCULATOR -->
-<section id="calculator">
+<section>
   <div class="container">
-    <div class="calc-intro reveal">
-      <p class="section-eyebrow">Your Personal Audit</p>
-      <h2 class="section-title">How much have<br/>you already lost?</h2>
-      <p>This is not a savings calculator. It shows you what your past behavior has already cost you — and what the next 20 years look like if nothing changes.</p>
+    <p class="eyebrow">What comes next</p>
+    <h2 class="section-title">Phase 1 is<br/>preservation.<br/>What follows is bigger.</h2>
+    <p class="section-sub">The lock layer is the foundation. As your record builds, what it unlocks grows — from loan visibility to real asset access to a behavioral credit identity that travels with you anywhere in the world.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="color:rgba(46,204,113,0.3);">01</div>
+        <div class="step-title" style="color:var(--green);">Live Now — Preservation</div>
+        <div class="step-body">Stop the leak. Build the record. Prove the discipline. Every lock completed builds your conduct score. Lenders begin to see you.</div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="color:rgba(230,168,23,0.3);">02</div>
+        <div class="step-title" style="color:var(--amber);">Coming — Capital</div>
+        <div class="step-body">Preserved capital finds its first yield. Fractional land. Treasury products. Dollar savings rails. Your discipline score becomes your access key.</div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="color:rgba(245,242,235,0.2);">03</div>
+        <div class="step-title">Future — Sovereignty</div>
+        <div class="step-body">Your conduct record moves on-chain. Globally portable. Permanently yours. No institution can manipulate it. Any system in the world can read it.</div>
+      </div>
     </div>
-
-    <div class="calc-body reveal">
-      <div class="calc-inputs">
-        <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey-light);margin-bottom:1.5rem;">Your Profile</p>
-
-        <div class="input-row">
-          <label>Your current age</label>
-          <input type="number" id="age" value="28" min="18" max="65" style="width:100%;background:#0a0a0a;border:1px solid rgba(245,242,235,0.2);color:#ffffff;padding:12px 16px;font-family:'DM Mono',monospace;font-size:14px;outline:none;" />
-        </div>
-
-        <div class="input-row">
-          <label>Age you started earning</label>
-          <input type="number" id="startAge" value="22" min="16" max="40" style="width:100%;background:#0a0a0a;border:1px solid rgba(245,242,235,0.2);color:#ffffff;padding:12px 16px;font-family:'DM Mono',monospace;font-size:14px;outline:none;" />
-        </div>
-
-        <div class="input-row">
-          <label style="display:block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#888;margin-bottom:6px;font-family:'DM Mono',monospace;">Daily leak amount (₦)</label>
-          <input type="number" id="dailyLeak" value="2000" min="100" step="100" style="width:100%;background:#0a0a0a;border:1px solid rgba(245,242,235,0.2);color:#ffffff;padding:12px 16px;font-family:'DM Mono',monospace;font-size:14px;outline:none;" />
-        </div>
-
-        <button id="auditBtn" onclick="window.runMyAudit()" style="width:100%;background:#c0392b;color:#ffffff;border:none;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.08em;cursor:pointer;margin-top:1.5rem;transition:background 0.2s;" onmouseover="this.style.background='#e74c3c'" onmouseout="this.style.background='#c0392b'">
-          CALCULATE MY ACTUAL NUMBER
-        </button>
-        <p style="font-size:11px;color:#888;font-family:'DM Mono',monospace;margin-top:0.75rem;text-align:center;letter-spacing:0.08em;">These are average Nigerian numbers. Change the inputs above to see your specific number.</p>
-      </div>
-
-      <div id="audit-results" style="display:block;margin-top:2rem;">
-      <div class="calc-results">
-        <div class="result-block">
-          <p class="result-tag">Already leaked since you started earning</p>
-          <div class="result-number red" id="r-lost">₦8.6M</div>
-          <p class="result-sub" id="r-lost-sub">6 years of leaks. That money existed. It is gone.</p>
-        </div>
-
-        <div class="result-block">
-          <p class="result-tag" id="ghost-label">What it would be worth today if redirected</p>
-          <div class="result-number green" id="r-ghost">₦11.8M</div>
-          <p class="result-sub">The gap between where you are and where you could be.</p>
-        </div>
-
-        <div style="margin:1.5rem 0;">
-          <p style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#888;font-family:'DM Mono',monospace;margin-bottom:1.5rem;">The 20-year decision you are making right now</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px;">
-            <div style="background:#1a1a1a;padding:2rem;border-top:3px solid #c0392b;">
-              <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#c0392b;font-family:'DM Mono',monospace;margin-bottom:0.75rem;">Nothing changes</p>
-              <p id="p-l20" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);color:#c0392b;line-height:0.9;margin-bottom:0.5rem;">₦18.0M</p>
-              <p style="font-size:11px;color:#888;font-family:'DM Mono',monospace;">Gone. Nothing to show.</p>
-            </div>
-            <div style="background:#1a1a1a;padding:2rem;border-top:3px solid #2ecc71;">
-              <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#2ecc71;font-family:'DM Mono',monospace;margin-bottom:0.75rem;">Redirect 30% today</p>
-              <p id="p-c20" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);color:#2ecc71;line-height:0.9;margin-bottom:0.5rem;">₦17.1M</p>
-              <p style="font-size:11px;color:#888;font-family:'DM Mono',monospace;">Built. Yours. Compounding.</p>
-            </div>
-          </div>
-          <div style="background:#0a0a0a;border:1px solid rgba(245,242,235,0.15);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;">
-            <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#888;font-family:'DM Mono',monospace;">What doing nothing actually costs you</p>
-            <p id="swing-val" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#ffffff;line-height:1;">₦35.1M</p>
-          </div>
-        </div>
-
-        <div class="verdict-box" id="verdict">At <strong>₦4,000 leaked daily</strong>, you will give away <strong>₦28.8M</strong> in 20 years with nothing to show. Redirecting just 30% — <strong>₦36K/month</strong> — builds <strong>₦27.3M</strong> in capital. The compounded growth alone is <strong>₦18.7M</strong>. That is the cost of doing nothing.</div>
-        <p style="font-size:10px;color:#888;font-family:'DM Mono',monospace;margin-top:1rem;letter-spacing:0.05em;">Assumes 10% average annual growth for redirected capital. Leakage = money spent with no asset accumulation.</p>
-
-        <button class="btn-primary" style="width:100%;margin-top:1.5rem;" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Stop The Leak — Join Waitlist</button>
-      </div>
-      </div>
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--grey-mid);border-left:2px solid var(--border-strong);max-width:600px;">
+      <p style="font-size:12px;color:rgba(245,242,235,0.6);line-height:1.7;">Insight AI — coming to your dashboard. A read-only financial advisor that knows your record, your patterns, and your goals. It does not move money. It does not make decisions. It tells you the truth about what your numbers mean — and what they could become.</p>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<div class="cta-block">
+  <h2 class="cta-title">The record<br/>starts<br/>when you do.</h2>
+  <p class="cta-sub">Every day without a record is a day lenders cannot see.</p>
+  <a href="/nomad/signup.html" class="btn-primary">Start Now</a>
+</div>
 
-<section style="background:#0d0d0d;padding:6rem 2.5rem;border-bottom:1px solid rgba(245,242,235,0.1);">
-  <div style="max-width:960px;margin:0 auto;">
-    <p style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:2rem;font-family:'DM Mono',monospace;">How It Works</p>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,96px);line-height:0.92;color:#ffffff;margin-bottom:2rem;letter-spacing:0.02em;">You do not need<br/>to stop spending.</h2>
-    <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2vw,24px);color:rgba(245,242,235,0.75);margin-bottom:3rem;line-height:1.7;max-width:680px;">You do not need to become disciplined overnight. You do not need to give up betting, drinks, or the things you enjoy. You need to redirect one habit into the Nomad escrow layer. That single redirection, held consistently, does two things at once: it builds your capital, and it builds your record.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:3rem;">
-      <div style="background:#1a1a1a;padding:2rem;border-left:3px solid rgba(245,242,235,0.15);">
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffffff;margin-bottom:0.75rem;letter-spacing:0.05em;">01. Connect</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">Link your Nigerian bank accounts. Your money stays in your accounts. Fully closed loop — always returns to your verified account.</p>
-      </div>
-      <div style="background:#1a1a1a;padding:2rem;border-left:3px solid rgba(245,242,235,0.15);">
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffffff;margin-bottom:0.75rem;letter-spacing:0.05em;">02. Redirect</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">Choose one daily habit. Set the amount. Nomad pulls it into the escrow layer on schedule. The lock duration is set by the amount relative to your income.</p>
-      </div>
-      <div style="background:#1a1a1a;padding:2rem;border-left:3px solid rgba(245,242,235,0.15);">
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffffff;margin-bottom:0.75rem;letter-spacing:0.05em;">03. Build Record</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">Every lock completed. Every relock honored. Every breach recorded. Your discipline score is built from what actually happens — not what you intend.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:3rem;">
-      <div style="background:#2a2a2a;padding:2.5rem;border-top:2px solid #ffffff;">
-        <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#888;margin-bottom:1rem;font-family:'DM Mono',monospace;">For you</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#ffffff;margin-bottom:1rem;letter-spacing:0.03em;">Less liquid access. Less impulse damage.</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">The friction between your money and your impulse is the product. Over time your preserved capital becomes the foundation for real assets.</p>
-      </div>
-      <div style="background:#2a2a2a;padding:2.5rem;border-top:2px solid #2ecc71;">
-        <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#888;margin-bottom:1rem;font-family:'DM Mono',monospace;">For lenders and institutions</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#2ecc71;margin-bottom:1rem;letter-spacing:0.03em;">Your behavior. Their proof.</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">40 million Nigerians are invisible to the formal credit system. Nomad is the witness system that changes that. Your conduct score is proof lenders have never had before.</p>
-      </div>
-    </div>
-    <a href="#waitlist" style="display:inline-block;background:#ffffff;color:#0a0a0a;padding:16px 40px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">Redirect One Leak. Start Now.</a>
-  </div>
-</section>
-<section id="how">
-  <div class="container">
-    <p class="section-eyebrow reveal">The Mechanism</p>
-    <h2 class="section-title reveal">Discipline by structure.<br/>Not motivation.</h2>
-
-    <div class="steps-grid reveal">
-      <div class="step-card">
-        <span class="step-num">01</span>
-        <h3 class="step-title">Lock For Time</h3>
-        <p class="step-body">Deposits become time-locked. The larger the amount, the longer the lock. Impulse cannot reach what time protects. This is not willpower — it is architecture.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-num">02</span>
-        <h3 class="step-title">Let Impulse Die</h3>
-        <p class="step-body">The 24-hour decision window is where most financial damage happens. Nomad puts friction between you and the action. By the time the lock matures, the pressure is usually gone.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-num">03</span>
-        <h3 class="step-title">Build Your Record</h3>
-        <p class="step-body">Every lock completed, every relock honored, every tax vault provisioned — recorded permanently as your discipline score. This is your behavioral credit file being built in real time.</p>
-      </div>
-    </div>
-
-    <div style="margin-top:2px;background:var(--grey);padding:2rem;" class="reveal visible">
-      <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey-light);margin-bottom:1rem;">The Reset Rule</p>
-      <p style="font-size:13px;color:rgba(245,242,235,0.7);line-height:1.8;max-width:680px;">Early unlock is allowed — but it costs you a 3–5% fee and a -5 discipline point penalty. Two breaches in 30 days triggers Protocol Breach status, locking you out of credit access previews for 60 days. The system does not punish you. It records you accurately.</p>
-    </div>
-  </div>
-</section>
-
-<!-- POINTS / CREDIT -->
-<section id="points">
-  <div class="container">
-    <div class="points-intro reveal">
-      <p class="section-eyebrow">Behavioral Credit</p>
-      <h2 class="section-title">Your discipline becomes<br/>your credit score.</h2>
-      <p style="font-size:13px;color:var(--grey-light);line-height:1.8;margin-top:1rem;">Nigeria has 40 million credit-invisible adults. Not because they're undisciplined — because there was no system watching and recording their financial behavior. Nomad is that system. Your points score is your proof.</p>
-    </div>
-
-    <div class="levels-grid reveal">
-      <div class="level-card">
-        <p class="level-name">Seedling</p>
-        <p class="level-pts">10 points</p>
-        <p class="level-benefit">Disciplined user status. Your record begins.</p>
-      </div>
-      <div class="level-card">
-        <p class="level-name">Sapling</p>
-        <p class="level-pts">50 points</p>
-        <p class="level-benefit">Micro-loan preview. Lender visibility begins.</p>
-      </div>
-      <div class="level-card">
-        <p class="level-name">Forest</p>
-        <p class="level-pts">300 points</p>
-        <p class="level-benefit">Community pool access. Higher loan eligibility.</p>
-      </div>
-      <div class="level-card">
-        <p class="level-name">Sovereign</p>
-        <p class="level-pts">1,000 points</p>
-        <p class="level-benefit">Behavior-based alternative credit tier. Full lender access.</p>
-      </div>
-    </div>
-
-    <div class="credit-insight reveal">
-      <div>
-        <h3>The same idea that built American credit.</h3>
-        <p>In 1841, Lewis Tappan created a network to observe and record how merchants behaved with money. Not their wealth — their behavior. That observation system became the foundation of commercial credit in America. Nomad does the same thing, but instead of a local reporter watching a merchant, the protocol itself is the witness. Your lock history, your streak, your tax vault compliance — all recorded. All permanent. All yours to show.</p>
-      </div>
-      <div class="credit-proof">
-        <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey-light);margin-bottom:1rem;">What lenders see</p>
-        <div class="proof-item"><span class="proof-label">Locks completed without breach</span><span class="proof-val">Recorded</span></div>
-        <div class="proof-item"><span class="proof-label">Auto-relock compliance streak</span><span class="proof-val">Recorded</span></div>
-        <div class="proof-item"><span class="proof-label">Tax vault provisioning</span><span class="proof-val">Recorded</span></div>
-        <div class="proof-item"><span class="proof-label">Protocol breach history</span><span class="proof-val">Permanent</span></div>
-        <div class="proof-item"><span class="proof-label">Discipline level</span><span class="proof-val">Visible</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IDENTITY TEASE -->
-<section style="background:#050505;padding:8rem 2.5rem;border-top:1px solid rgba(245,242,235,0.08);border-bottom:1px solid rgba(245,242,235,0.08);">
-  <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <p style="font-size:10px;letter-spacing:0.35em;text-transform:uppercase;color:#555;font-family:'DM Mono',monospace;margin-bottom:3rem;">What Nomad believes</p>
-    <p style="font-family:'DM Mono',monospace;font-size:13px;color:#555;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2rem;">The financial system judges what you have.</p>
-    <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,88px);color:#F2EDE8;line-height:0.95;letter-spacing:0.02em;margin-bottom:2rem;">NOMAD MEASURES<br/>WHAT YOU DO.</p>
-    <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(245,242,235,0.85);line-height:1.8;margin-bottom:3rem;">Every lock honored. Every streak. Every redirected leak.<br/>It builds something more valuable than a balance.</p>
-    <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,48px);color:#1DB954;letter-spacing:0.05em;margin-bottom:3rem;">A RECORD THAT SPEAKS FOR YOU.</p>
-    <div style="height:1px;background:rgba(245,242,235,0.08);margin-bottom:3rem;"></div>
-    <p style="font-family:'DM Mono',monospace;font-size:12px;color:#555;letter-spacing:0.08em;line-height:2;margin-bottom:1rem;">This is how behavior becomes access.<br/>How discipline becomes capital.</p>
-    <p style="font-family:'DM Mono',monospace;font-size:11px;color:#444;letter-spacing:0.08em;margin-bottom:0.5rem;">You are not your salary.</p>
-    <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,64px);color:#F2EDE8;letter-spacing:0.05em;margin-bottom:1rem;">YOU ARE YOUR PATTERN.</p>
-    <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(16px,2vw,22px);color:rgba(245,242,235,0.4);letter-spacing:0.02em;">And patterns can change.</p>
-  </div>
-</section>
-
-<!-- WAITLIST -->
-
-<section style="background:#080808;padding:6rem 2.5rem;border-bottom:1px solid rgba(245,242,235,0.1);">
-  <div style="max-width:960px;margin:0 auto;">
-    <p style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:2rem;font-family:'DM Mono',monospace;">Where This Goes</p>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,96px);line-height:0.92;color:#ffffff;margin-bottom:2rem;letter-spacing:0.02em;">This is not<br/>a savings app.</h2>
-    <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(18px,2vw,24px);color:rgba(245,242,235,0.7);margin-bottom:3rem;line-height:1.7;max-width:680px;">Nomad is behavioral trust infrastructure. The escrow layer is Phase 1. What comes next is bigger than personal finance.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
-      <div style="background:#1a1a1a;padding:2rem;">
-        <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#e6a817;margin-bottom:1rem;font-family:'DM Mono',monospace;">Phase 2</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffffff;margin-bottom:0.75rem;letter-spacing:0.03em;">Real World Assets</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">Preserved capital deployed into land, commodity finance, and export bonds. Your discipline unlocks access to asset classes previously reserved for institutions.</p>
-      </div>
-      <div style="background:#1a1a1a;padding:2rem;">
-        <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#e6a817;margin-bottom:1rem;font-family:'DM Mono',monospace;">Phase 3</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffffff;margin-bottom:0.75rem;letter-spacing:0.03em;">On-Chain Trust Record</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">The discipline score moves on-chain. An immutable behavioral trust record that no institution can manipulate and any system can read. Globally portable. Permanently yours.</p>
-      </div>
-      <div style="background:#1a1a1a;padding:2rem;">
-        <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#e6a817;margin-bottom:1rem;font-family:'DM Mono',monospace;">The Long Game</p>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ffffff;margin-bottom:0.75rem;letter-spacing:0.03em;">Universal Basic Income</p>
-        <p style="font-size:12px;color:rgba(245,242,235,0.85);font-family:'DM Mono',monospace;line-height:1.7;">When Nigeria distributes UBI based on behavioral trust, Nomad is the infrastructure that makes it possible. Sovereign level users receive more. Your behavior determines your benefit.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section style="background:#0d0d0d;padding:5rem 2.5rem;border-bottom:1px solid rgba(245,242,235,0.1);">
-  <div style="max-width:960px;margin:0 auto;">
-    <p style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#888;margin-bottom:1.5rem;font-family:'DM Mono',monospace;">Before You Spend Anything</p>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,80px);line-height:0.92;color:#ffffff;margin-bottom:1rem;letter-spacing:0.02em;">Know what you<br/>owe first.</h2>
-    <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(16px,1.8vw,22px);color:rgba(245,242,235,0.85);margin-bottom:3rem;line-height:1.6;max-width:560px;">Most Nigerians spend their VAT and WHT before they even know it is gone. Enter your monthly income below and see exactly what should be locked before you touch anything.</p>
-    <div style="background:#1a1a1a;border:1px solid rgba(245,242,235,0.15);padding:2.5rem;max-width:600px;">
-      <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#888;margin-bottom:1.5rem;font-family:'DM Mono',monospace;">VAT / WHT Quick Calculator</p>
-      <div style="margin-bottom:1.5rem;">
-        <label style="display:block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#888;margin-bottom:8px;font-family:'DM Mono',monospace;">Monthly Income (&#x20A6;)</label>
-        <input id="taxIncome" type="number" value="200000" oninput="calcTax()" style="width:100%;background:#0a0a0a;border:1px solid rgba(245,242,235,0.2);color:#ffffff;padding:12px 16px;font-family:'DM Mono',monospace;font-size:14px;outline:none;" />
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:1.5rem;">
-        <div style="background:#2a2a2a;padding:1.25rem;">
-          <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#888;margin-bottom:6px;font-family:'DM Mono',monospace;">VAT (7.5%)</p>
-          <p id="vatOut" style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#e6a817;line-height:1;">&#x20A6;15,000</p>
-        </div>
-        <div style="background:#2a2a2a;padding:1.25rem;">
-          <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#888;margin-bottom:6px;font-family:'DM Mono',monospace;">WHT (10%)</p>
-          <p id="whtOut" style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:#e6a817;line-height:1;">&#x20A6;20,000</p>
-        </div>
-      </div>
-      <div style="background:#0a0a0a;border:1px solid rgba(245,242,235,0.1);padding:1.25rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-        <div>
-          <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#888;margin-bottom:4px;font-family:'DM Mono',monospace;">Lock this immediately</p>
-          <p id="vaultOut" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#2ecc71;line-height:1;">&#x20A6;35,000</p>
-        </div>
-        <div style="text-align:right;">
-          <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#888;margin-bottom:4px;font-family:'DM Mono',monospace;">Safe to spend</p>
-          <p id="spendOut" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#ffffff;line-height:1;">&#x20A6;165,000</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<script>
-function calcTax() {
-  var income = parseFloat(document.getElementById('taxIncome').value) || 0;
-  var vat = income * 0.075;
-  var wht = income * 0.1;
-  var vault = vat + wht;
-  var spend = Math.max(0, income - vault);
-  var fmt = function(n) { return '\u20a6' + Math.round(n).toLocaleString(); };
-  document.getElementById('vatOut').textContent = fmt(vat);
-  document.getElementById('whtOut').textContent = fmt(wht);
-  document.getElementById('vaultOut').textContent = fmt(vault);
-  document.getElementById('spendOut').textContent = fmt(spend);
-}
-</script>
-<section id="waitlist">
-  <div class="container">
-    <div class="waitlist-grid">
-      <div class="waitlist-left reveal">
-        <h2>Stop being<br/>credit invisible.</h2>
-        <p>Nomad is in closed development. Join the waitlist and be among the first Nigerians building a behavioral credit record.</p>
-        <p style="margin-top:1.5rem;font-size:12px;">Your data helps us build the aggregate picture. Every person who joins tells us more about where Nigeria's money actually goes — and what it would take to redirect it.</p>
-        <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);">
-          <p style="font-size:11px;color:var(--grey-light);letter-spacing:0.05em;line-height:1.8;">No bank. No middleman. Your money stays in your account until you choose to lock it. Fully closed loop.</p>
-        </div>
-      </div>
-
-      <div class="waitlist-right reveal">
-        <div id="wl-form">
-          <div class="form-2col">
-            <div class="form-row">
-              <label>Full name</label>
-              <input type="text" id="wl-name" placeholder="Your name" />
-            </div>
-            <div class="form-row">
-              <label>Age</label>
-              <input type="number" id="wl-age" placeholder="e.g. 28" min="18" max="70" />
-            </div>
-          </div>
-          <div class="form-row">
-            <label>Email address</label>
-            <input type="email" id="wl-email" placeholder="you@email.com" />
-          </div>
-          <div class="form-row">
-            <label>Phone number</label>
-            <input type="tel" id="wl-phone" placeholder="+234 000 000 0000" />
-          </div>
-          <div class="form-row">
-            <label>Monthly income bracket</label>
-            <select id="wl-income">
-              <option value="">Select bracket</option>
-              <option>Below ₦100,000</option>
-              <option>₦100,000 – ₦300,000</option>
-              <option>₦300,000 – ₦600,000</option>
-              <option>₦600,000 – ₦1,500,000</option>
-              <option>Above ₦1,500,000</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Your biggest daily leak</label>
-            <select id="wl-leak">
-              <option value="">Select category</option>
-              <option>Betting / gambling</option>
-              <option>Airtime / data</option>
-              <option>Impulse food and drinks</option>
-              <option>Impulse transfers to people</option>
-              <option>Subscriptions and streaming</option>
-              <option>Shopping / lifestyle</option>
-              <option>I genuinely don't know</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>What do you want to control?</label>
-            <input type="text" id="wl-goal" placeholder="e.g. stop betting, save for land, build credit" />
-          </div>
-          <button class="form-submit" onclick="submitWaitlist()">Secure My Spot — Join Waitlist</button>
-          <p class="form-note">Your information is never sold. It is used to understand Nigeria's leak patterns and build the product that solves them. No spam.</p>
-        </div>
-        <div class="success-msg" id="wl-success">
-          <strong style="display:block;margin-bottom:8px;">You're on the list.</strong>
-          Your spot is secured. We'll reach out when Nomad opens access. In the meantime — every day you wait is another day the leak continues. Stay sharp.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <span class="footer-logo">NOMAD</span>
   <div class="footer-links">
-    <a href="#how">Protocol</a>
-    <a href="#points">Credit Score</a>
-    <a href="mailto:help@nomad.app">Contact</a>
+    <a href="/nomad/rules.html">Rules</a>
+    <a href="/nomad/login.html">Login</a>
   </div>
   <span class="footer-copy">© 2025 Nomad — Consumption or Capital. The difference compounds.</span>
 </footer>
 
-<script>
-  function runMyAudit() {
-    var resultsEl = document.getElementById('audit-results');
-    if (resultsEl) { resultsEl.style.display = 'block'; resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    var age = parseInt(document.getElementById('age').value) || 28;
-    var startAge = parseInt(document.getElementById('startAge').value) || 22;
-    var daily = parseFloat(document.getElementById('dailyLeak').value) || 2000;
-    var rate = 0.10;
-    var monthly = daily * 30;
-    var yrs = Math.max(0, age - startAge);
-    var mr = rate / 12;
-
-    function fv(pmt, r, n) {
-      if (r === 0) return pmt * n;
-      return pmt * (Math.pow(1 + r, n) - 1) / r;
-    }
-
-    function fmt(n) {
-      if (n >= 1e9) return '₦' + (n/1e9).toFixed(1) + 'B';
-      if (n >= 1e6) return '₦' + (n/1e6).toFixed(1) + 'M';
-      if (n >= 1e3) return '₦' + Math.round(n/1e3) + 'K';
-      return '₦' + Math.round(n);
-    }
-
-    var lost = monthly * yrs * 12;
-    var ghost = fv(monthly, mr, yrs * 12);
-    var futureYrs = Math.max(20, 45 - age);
-    var futureTotal = fv(monthly, mr, (yrs + futureYrs) * 12);
-    var futureAnnualLeak = monthly * 12;
-    var red30 = monthly * 0.30;
-
-    var l5 = monthly * 12 * 5;
-    var l10 = monthly * 12 * 10;
-    var l20 = monthly * 12 * 20;
-    var c5 = fv(red30, mr, 60);
-    var c10 = fv(red30, mr, 120);
-    var c20 = fv(red30, mr, 240);
-    var growth = Math.max(0, c20 - (red30 * 12 * 20));
-
-    var lostEl = document.getElementById('r-lost');
-    var ghostEl = document.getElementById('r-ghost');
-    var lostSubEl = document.getElementById('r-lost-sub');
-    var pl5 = document.getElementById('p-l5');
-    var pl10 = document.getElementById('p-l10');
-    var pl20 = document.getElementById('p-l20');
-    var pc5 = document.getElementById('p-c5');
-    var pc10 = document.getElementById('p-c10');
-    var pc20 = document.getElementById('p-c20');
-    var verdictEl = document.getElementById('verdict');
-
-    if (lostEl) lostEl.textContent = fmt(lost);
-    if (ghostEl) ghostEl.textContent = fmt(futureTotal);
-    if (lostSubEl) lostSubEl.textContent = yrs + ' years of leaks. That money existed. It is gone.';
-    if (pl5) pl5.textContent = fmt(l5) + ' gone';
-    if (pl10) pl10.textContent = fmt(l10) + ' gone';
-    if (pl20) pl20.textContent = fmt(l20) + ' gone';
-    if (pc5) pc5.textContent = fmt(c5) + ' capital';
-    if (pc10) pc10.textContent = fmt(c10) + ' capital';
-    if (pc20) pc20.textContent = fmt(c20) + ' capital';
-
-    var swingEl = document.getElementById('swing-val');
-    if (swingEl) swingEl.textContent = fmt(l20 + c20);
-
-    var ghostLabel = document.getElementById('ghost-label');
-    if (ghostLabel) ghostLabel.textContent = 'What this becomes by age 45 if nothing changes';
-
-    if (verdictEl) {
-      verdictEl.innerHTML = 'At <strong>' + fmt(daily) + '/day</strong> the gap between your two futures is <strong>' + fmt(l20 + c20) + '</strong> over 20 years. That swing is the price of the decision you are making right now.';
-    }
-  }
-
-  function initCalc() {
-    var allFound = ['age', 'startAge', 'dailyLeak'].every(function(id) {
-      return document.getElementById(id) !== null;
-    });
-    if (!allFound) {
-      setTimeout(initCalc, 100);
-      return;
-    }
-    runMyAudit();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCalc);
-  } else {
-    setTimeout(initCalc, 50);
-  }
-
-  window.runMyAudit = runMyAudit;
-  window.calcLeak = runMyAudit;
-
-  function submitWaitlist() {
-    const name = document.getElementById('wl-name').value;
-    const email = document.getElementById('wl-email').value;
-    if (!name || !email) {
-      alert('Please fill in at least your name and email.');
-      return;
-    }
-    document.getElementById('wl-form').style.display = 'none';
-    document.getElementById('wl-success').style.display = 'block';
-  }
-
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  revealEls.forEach(el => observer.observe(el));
-</script>
 </body>
 </html>
-
-
-
-
