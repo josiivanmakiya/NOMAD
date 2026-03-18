@@ -31,6 +31,7 @@ section { padding: 7rem 2.5rem; }
 .eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-light); margin-bottom: 1.5rem; }
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+.mountain-icon { display: block; }
 
 /* HERO */
 #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; padding-bottom: 80px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -176,13 +177,13 @@ footer { padding: 2.5rem; border-top: 1px solid var(--border); display: flex; ju
 <body>
 
 <nav>
-  <a href="/nomad/landing.html" class="nav-logo">NOMAD</a>
-  <div class="nav-links">
-    <a href="/nomad/rules.html">Rules</a>
-    <a href="/nomad/about.html">About</a>
-    <a href="/nomad/login.html">Login</a>
-    <a href="/nomad/signup.html" class="nav-cta">Sign Up</a>
-  </div>
+  <a href="/nomad/landing.html" aria-label="Nomad">
+    <svg class="mountain-icon" width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 26L22 6L31 26H13Z" fill="#1a3320"/>
+      <path d="M2 26L10 10L18 26H2Z" fill="#2a4d30" opacity="0.85"/>
+      <path d="M18 26L25 13L32 26H18Z" fill="#1a3320" opacity="0.6"/>
+    </svg>
+  </a>
 </nav>
 
 <!-- HERO -->
