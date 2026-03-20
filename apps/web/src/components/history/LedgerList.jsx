@@ -1,3 +1,1 @@
-export default function LedgerList() {
-  return null;
-}
+export default function LedgerList() { return null; }
