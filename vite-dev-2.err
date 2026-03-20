@@ -1,0 +1,169 @@
+[2m9:09:52 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./DevSessionBanner.jsx" from "src/components/AppLayout.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/components/AppLayout.jsx[39m:2:29
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router-dom";
+  18 |  import DevSessionBanner from "./DevSessionBanner.jsx";
+     |                                ^
+  19 |  export default function AppLayout() {
+  20 |    return /* @__PURE__ */ jsxDEV(Fragment, { children: [[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m9:10:05 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./DevSessionBanner.jsx" from "src/components/AppLayout.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/components/AppLayout.jsx[39m:2:29
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router-dom";
+  18 |  import DevSessionBanner from "./DevSessionBanner.jsx";
+     |                                ^
+  19 |  export default function AppLayout() {
+  20 |    return /* @__PURE__ */ jsxDEV(Fragment, { children: [[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+[2m9:10:06 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./DevSessionBanner.jsx" from "src/components/AppLayout.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/components/AppLayout.jsx[39m:2:29
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router-dom";
+  18 |  import DevSessionBanner from "./DevSessionBanner.jsx";
+     |                                ^
+  19 |  export default function AppLayout() {
+  20 |    return /* @__PURE__ */ jsxDEV(Fragment, { children: [[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+[2m9:10:11 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./DevSessionBanner.jsx" from "src/components/AppLayout.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/components/AppLayout.jsx[39m:2:29
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router-dom";
+  18 |  import DevSessionBanner from "./DevSessionBanner.jsx";
+     |                                ^
+  19 |  export default function AppLayout() {
+  20 |    return /* @__PURE__ */ jsxDEV(Fragment, { children: [[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+[2m9:10:18 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./DevSessionBanner.jsx" from "src/components/AppLayout.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/components/AppLayout.jsx[39m:2:29
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router-dom";
+  18 |  import DevSessionBanner from "./DevSessionBanner.jsx";
+     |                                ^
+  19 |  export default function AppLayout() {
+  20 |    return /* @__PURE__ */ jsxDEV(Fragment, { children: [[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+[2m9:10:23 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./DevSessionBanner.jsx" from "src/components/AppLayout.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/components/AppLayout.jsx[39m:2:29
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router-dom";
+  18 |  import DevSessionBanner from "./DevSessionBanner.jsx";
+     |                                ^
+  19 |  export default function AppLayout() {
+  20 |    return /* @__PURE__ */ jsxDEV(Fragment, { children: [[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+[2m9:10:38 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./DevSessionBanner.jsx" from "src/components/AppLayout.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/components/AppLayout.jsx[39m:2:29
+[33m  16 |  }
+  17 |  import { Outlet } from "react-router-dom";
+  18 |  import DevSessionBanner from "./DevSessionBanner.jsx";
+     |                                ^
+  19 |  export default function AppLayout() {
+  20 |    return /* @__PURE__ */ jsxDEV(Fragment, { children: [[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+[2m9:13:19 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../content/text.js" from "src/features/app/DepositPage.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/features/app/DepositPage.jsx[39m:8:21
+[33m  23 |  import { useCurrency } from "../../state/CurrencyContext.jsx";
+  24 |  import { useAccount } from "../../state/AccountContext.jsx";
+  25 |  import { TEXT } from "../../content/text.js";
+     |                        ^
+  26 |  const formatDateTime = (value) => {
+  27 |    if (!value) return "—";[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 10)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m9:13:26 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../content/text.js" from "src/features/app/DepositPage.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/DELL/Desktop/NOMAD/apps/web/src/features/app/DepositPage.jsx[39m:8:21
+[33m  23 |  import { useCurrency } from "../../state/CurrencyContext.jsx";
+  24 |  import { useAccount } from "../../state/AccountContext.jsx";
+  25 |  import { TEXT } from "../../content/text.js";
+     |                        ^
+  26 |  const formatDateTime = (value) => {
+  27 |    if (!value) return "—";[39m
+      at TransformPluginContext._formatError (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 10)
+      at async TransformPluginContext.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///C:/Users/DELL/Desktop/NOMAD/apps/web/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)

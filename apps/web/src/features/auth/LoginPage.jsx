@@ -1,104 +1,127 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../state/AuthContext.jsx";
-import Logo from "../../components/Logo.jsx";
-import { TEXT } from "./text.js";
-import { loginUser } from "../../api.js";
+
+const styles = `
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400&family=DM+Mono:wght@400;500;600&display=swap');
+  .auth-root{--white:#fafaf8;--ink:#0c0c0a;--body:#2e2e2b;--muted:#8a8a85;--border:#e8e8e3;--border-2:#d4d4cc;--green:#1a3320;--green-mid:#2a4d30;--green-pale:#f0f5f0;--red:#b83232;}
+  .auth-root *{box-sizing:border-box;margin:0;padding:0;}
+  .auth-root{background:var(--white);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
+  .auth-nav{padding:20px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(250,250,248,0.9);backdrop-filter:blur(12px);}
+  .auth-nav-logo{font-family:'Fraunces','Georgia',serif;font-size:20px;font-weight:800;letter-spacing:-0.03em;color:var(--ink);cursor:pointer;}
+  .auth-nav-link{font-size:13px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:inherit;font-weight:500;transition:color 0.2s;}
+  .auth-nav-link:hover{color:var(--ink);}
+  .auth-main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 20px;}
+  .auth-wrap{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:880px;background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.06);}
+  .auth-left{background:var(--green);padding:56px 48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+  .auth-left::before{content:'Nomad';position:absolute;font-family:'Fraunces','Georgia',serif;font-size:140px;font-weight:800;color:rgba(255,255,255,0.04);bottom:-20px;right:-10px;line-height:1;pointer-events:none;letter-spacing:-0.04em;}
+  .auth-kicker{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.5rem;}
+  .auth-left h1{font-family:'Fraunces','Georgia',serif;font-size:clamp(32px,3.5vw,44px);font-weight:700;line-height:1.05;color:#fff;margin-bottom:1.25rem;letter-spacing:-0.03em;}
+  .auth-left h1 em{font-style:italic;font-weight:300;}
+  .auth-left p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.8;max-width:280px;}
+  .auth-left-quote{font-family:'Fraunces','Georgia',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.35);line-height:1.6;}
+  .auth-right{padding:56px 48px;overflow-y:auto;}
+  .auth-right h2{font-family:'Fraunces','Georgia',serif;font-size:28px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-bottom:2rem;}
+  .auth-field{margin-bottom:1rem;}
+  .auth-field label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .auth-field input{width:100%;background:var(--white);border:1px solid var(--border-2);border-radius:10px;color:var(--ink);padding:13px 16px;font-family:inherit;font-size:15px;font-weight:500;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+  .auth-field input:focus{border-color:var(--green-mid);box-shadow:0 0 0 3px rgba(42,77,48,0.1);}
+  .auth-field input::placeholder{color:#c4c4be;}
+  .auth-submit{width:100%;background:var(--green);color:#fff;border:none;border-radius:980px;padding:14px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;margin-top:0.5rem;transition:background 0.2s;letter-spacing:-0.01em;}
+  .auth-submit:hover{background:var(--green-mid);}
+  .auth-submit:disabled{opacity:0.6;cursor:not-allowed;}
+  .auth-note{font-size:13px;color:var(--muted);margin-top:1rem;text-align:center;line-height:1.5;}
+  .auth-note button{color:var(--green-mid);background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;}
+  .auth-error{font-size:13px;color:var(--red);margin-top:0.75rem;text-align:center;font-weight:500;}
+  .auth-footer{padding:20px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:#fff;}
+  .auth-footer p{font-size:13px;color:var(--muted);}
+  .auth-footer button{font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:inherit;font-weight:500;transition:color 0.2s;}
+  .auth-footer button:hover{color:var(--ink);}
+  @media(max-width:700px){.auth-nav{padding:16px 20px;}.auth-wrap{grid-template-columns:1fr;}.auth-left{display:none;}.auth-right{padding:40px 28px;}.auth-footer{padding:16px 20px;}}
+`;
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("");
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!email.trim() || !password.trim()) {
-      setStatus(TEXT.LOGIN.errors.required);
-      return;
-    }
-
+  const handleSubmit = async () => {
+    if (!email || !password) { setError("Please fill in all fields."); return; }
+    setLoading(true);
+    setError("");
     try {
-      if (import.meta.env.DEV) {
-        login(email.trim(), "", "dev-user", { tier: "Prospect", userType: "individual" });
-        navigate("/app");
-        return;
-      }
-      const data = await loginUser({ email: email.trim() });
-      login(data.user?.email || email.trim(), data.user?.name || "", data.user?.id, {
-        tier: data.user?.tier,
-        phoneNumber: data.user?.phoneNumber,
-        userType: data.user?.userType || "individual",
-      });
+      await login({ email, password });
       navigate("/app");
-    } catch (error) {
-      setStatus(error.message || "Could not log in.");
+    } catch (err) {
+      setError(err?.message || "Invalid email or password.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#070707] text-[#f5f2eb] font-mono">
-      <div className="mx-auto flex min-h-screen max-w-5xl items-center justify-center px-6 py-16">
-        <div className="w-full max-w-md border border-[rgba(245,242,235,0.2)] bg-[#0b0b0b] p-8">
-          <div className="mb-8 flex items-center gap-3">
-            <Logo size={32} />
+    <div className="auth-root">
+      <style>{styles}</style>
+
+      <nav className="auth-nav">
+        <div className="auth-nav-logo" onClick={() => navigate("/")}>Nomad</div>
+        <button className="auth-nav-link" onClick={() => navigate("/signup")}>
+          Need an account? Sign up →
+        </button>
+      </nav>
+
+      <div className="auth-main">
+        <div className="auth-wrap">
+          <div className="auth-left">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-[#888]">
-                {TEXT.APP_NAME}
-              </p>
-              <h1 className="font-display text-4xl tracking-[0.08em] text-white">
-                {TEXT.LOGIN.title}
-              </h1>
-              <p className="text-xs text-[#9a9a9a]">{TEXT.LOGIN.subtitle}</p>
+              <p className="auth-kicker">Welcome back</p>
+              <h1>Your record<br/>is <em>waiting.</em></h1>
+              <p>Every day you have been building something. Log in and see where your discipline stands.</p>
             </div>
+            <p className="auth-left-quote">"The protocol does not judge you.<br/>It records you accurately."</p>
           </div>
 
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            <div>
-              <label className="mb-2 block text-[11px] uppercase tracking-[0.2em] text-[#888]">
-                {TEXT.LOGIN.labels.email}
-              </label>
+          <div className="auth-right">
+            <h2>Log in</h2>
+            <div className="auth-field">
+              <label>Email address</label>
               <input
-                className="w-full border border-[rgba(245,242,235,0.2)] bg-transparent px-4 py-3 text-sm text-[#f5f2eb] outline-none placeholder:text-[#666] focus:border-white"
+                type="email"
+                placeholder="you@email.com"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="email@example.com"
+                onChange={e => setEmail(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleSubmit()}
               />
             </div>
-            <div>
-              <label className="mb-2 block text-[11px] uppercase tracking-[0.2em] text-[#888]">
-                {TEXT.LOGIN.labels.password}
-              </label>
+            <div className="auth-field">
+              <label>Password</label>
               <input
-                className="w-full border border-[rgba(245,242,235,0.2)] bg-transparent px-4 py-3 text-sm text-[#f5f2eb] outline-none placeholder:text-[#666] focus:border-white"
                 type="password"
+                placeholder="Your password"
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                placeholder="••••••••"
+                onChange={e => setPassword(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleSubmit()}
               />
             </div>
-            {status && (
-              <p className="border-l-2 border-[#c0392b] bg-[#0f0f0f] px-3 py-2 text-xs text-[#cbb3a8]">
-                {status}
-              </p>
-            )}
-            <button
-              className="w-full border border-white bg-white px-4 py-3 text-xs font-bold uppercase tracking-[0.3em] text-[#070707] transition hover:bg-[#e6e6e6]"
-              type="submit"
-            >
-              {TEXT.LOGIN.cta}
+            {error && <div className="auth-error">{error}</div>}
+            <button className="auth-submit" onClick={handleSubmit} disabled={loading}>
+              {loading ? "Logging in..." : "Log in to Nomad"}
             </button>
-          </form>
-
-          <p className="mt-6 text-xs text-[#888]">
-            {TEXT.LOGIN.footer.prompt}{" "}
-            <Link className="text-white underline" to="/signup">
-              {TEXT.LOGIN.footer.link}
-            </Link>
-          </p>
+            <p className="auth-note">
+              Don't have an account?{" "}
+              <button onClick={() => navigate("/signup")}>Sign up</button>
+            </p>
+          </div>
         </div>
       </div>
+
+      <footer className="auth-footer">
+        <button onClick={() => navigate("/")}>← Back to Nomad</button>
+        <p>© 2025 Nomad — Behavioral finance infrastructure for Africa</p>
+      </footer>
     </div>
   );
 }
